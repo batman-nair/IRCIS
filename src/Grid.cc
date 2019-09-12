@@ -11,7 +11,7 @@ void Grid::read_file(std::string file_name) {
   std::ifstream src_file(file_name);
   lines_.clear();
   length_ = 0;
-  
+
   std::string line;
   while (std::getline(src_file, line)) {
     lines_.push_back(line);
@@ -24,8 +24,7 @@ void Grid::read_file(std::string file_name) {
 void Grid::equalize_lines() {
   for (auto& line: lines_) {
     if (line.length() < length_) {
-      line.resize(length_ - line.length(), '.');
+      line.resize(length_, '.');
     }
   }
 }
-

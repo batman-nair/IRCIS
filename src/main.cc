@@ -1,4 +1,5 @@
 #include <Grid.h>
+#include <Logger.h>
 
 #include <iostream>
 
@@ -13,10 +14,12 @@ int main(int argc, char *argv[]) {
   std::string file_name = argv[1];
 
   Grid grid(file_name);
+  Logger log;
 
   for (const auto &line : grid.get_lines()) {
-    std::cout << line << std::endl;
+    log.printl(line);
   }
+
 
   return 0;
 }

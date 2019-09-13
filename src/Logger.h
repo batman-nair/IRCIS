@@ -4,7 +4,7 @@
 
 #include <string>
 
-#ifdef DEBUG
+#ifdef NDEBUG
 #define DBG(x) std::cout << "DEBUG: " << x << std::endl;
 #define PR(x) (#x) << ": " << x << " "
 #else
@@ -12,16 +12,18 @@
 #define PR(x) ;
 #endif
 
-class Logger {
- public:
-  void print(std::string str) {
-    std::cout << str;
-  }
-  void print(char ch) {
-    std::cout << ch;
-  }
+namespace PTrain {
+  class Logger {
+  public:
+    void print(std::string str) {
+      std::cout << str;
+    }
+    void print(char ch) {
+      std::cout << ch;
+    }
 
-  void printl(std::string str) {
-    std::cout << str << std::endl;
-  }
-};
+    void printl(std::string str) {
+      std::cout << str << std::endl;
+    }
+  };
+}

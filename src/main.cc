@@ -13,8 +13,8 @@ int main(int argc, char *argv[]) {
 
   std::string file_name = argv[1];
 
-  Grid grid(file_name);
-  Logger log;
+  PTrain::Grid grid(file_name);
+  PTrain::Logger log;
 
   for (const auto &line : grid.get_lines()) {
     log.printl(line);

@@ -1,7 +1,9 @@
 #include <Grid.h>
 #include <Logger.h>
+#include <Runner.h>
 
 #include <iostream>
+#include <memory>
 
 int main(int argc, char *argv[]) {
 
@@ -16,10 +18,10 @@ int main(int argc, char *argv[]) {
   PTrain::Grid grid(file_name);
   PTrain::Logger log;
 
-  for (const auto &line : grid.get_lines()) {
-    log.printl(line);
-  }
+  PTrain::Runner runner(std::make_shared<PTrain::Grid>(grid), std::make_shared<PTrain::Logger>(log));
 
+  while (runner.step());
+  std::cout << std::endl;
 
   return 0;
 }

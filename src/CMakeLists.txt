@@ -1,5 +1,6 @@
 add_executable(ptrain
   main.cc
+  Runner.cc
   Grid.cc
   Logger.cc
   DirVec.cc

@@ -7,14 +7,13 @@ Each Runner has a stack which is it's main source of memory.
 # Rules #
 - Defualt/First Runner starts first character of the source file((0, 0) position) and move right from there.
 - '.' (dot) and ' ' (space) characters are considered blanks and are ignored.
+- Every Runner has it's own stack.
 - Runners process characters in orthongonal directions in a clockwise manner.
+    - The characters in directions perpendicular to the current movement direction is checked, only if it has the movement control character facing that direction.
     - Current Runner is assigned to the first character caught in the clockwise scan.
-    - If more than one character is found, then new Runners are created in those directions.
-    - New Runners with same stack are created for parsing the other directions.
-    - *Note: Movement control is not necessarily needed to control direction of run. Still it's better to have a directional marker as the first character when signifying a change in direction.*
-
+    - If more than one directional movement is caught, then new Runners are created in those directions.
+	- New Runners will have the same stack as the original Runner.
 - Runner dies if it reaches the end of Grid or a End Processing character.
-- Every Runner has a stack.
 - In stack push mode, any literal that comes in is pushed into stack as is.
 - *Integer* mode can be used to push in integers as is and special characters.
 - *Integer* mode has precedence over stack mode.

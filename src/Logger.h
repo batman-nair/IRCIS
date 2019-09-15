@@ -1,7 +1,8 @@
 #pragma once
 
-#include <iostream>
+#include <DataType.h>
 
+#include <iostream>
 #include <string>
 
 #ifdef NDEBUG
@@ -15,15 +16,14 @@
 namespace PTrain {
   class Logger {
   public:
-    void print(std::string str) {
-      std::cout << str;
-    }
-    void print(char ch) {
-      std::cout << ch;
+    template <class T>
+    void print(T val) {
+      std::cout << val;
     }
 
-    void printl(std::string str) {
-      std::cout << str << std::endl;
+    template <class T>
+    void print_line(T val) {
+      std::cout << val << std::endl;
     }
   };
 }

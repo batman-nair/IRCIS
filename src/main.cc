@@ -1,6 +1,6 @@
 #include <Grid.h>
 #include <Logger.h>
-#include <Runner.h>
+#include <PTrain.h>
 
 #include <iostream>
 #include <memory>
@@ -15,13 +15,11 @@ int main(int argc, char *argv[]) {
 
   std::string file_name = argv[1];
 
-  PTrain::Grid grid(file_name);
-  PTrain::Logger log;
+  PTrain::PTrain ptrain(std::make_unique<PTrain::Grid>(file_name), std::make_unique<PTrain::Logger>());
 
-  PTrain::Runner runner(std::make_shared<PTrain::Grid>(grid), std::make_shared<PTrain::Logger>(log));
+  while (ptrain.update());
 
-  while (runner.step());
-  std::cout << std::endl;
+  DBG("Program has finished running");
 
   return 0;
 }

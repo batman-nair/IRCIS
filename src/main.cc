@@ -15,8 +15,7 @@ int main(int argc, char *argv[]) {
 
   std::string file_name = argv[1];
 
-  PTrain::PTrain ptrain(std::make_unique<PTrain::Grid>(file_name), std::make_unique<PTrain::Logger>());
-
+  PTrain::PTrain ptrain(file_name);
   while (ptrain.update());
 
   DBG("Program has finished running");

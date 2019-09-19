@@ -17,11 +17,6 @@ namespace PTrain {
       runner_list_.emplace_back(grid_, log_, new_runners_list_);
     }
 
-    PTrain(std::unique_ptr<Grid> grid, std::unique_ptr<Logger> log)
-      : grid_(std::move(grid)), log_(std::move(log)) {
-      runner_list_.emplace_back(grid_, log_, new_runners_list_);
-    }
-
     // Steps all runner instances
     // Returns false when all runners are dead
     // (woah that sounds dark)

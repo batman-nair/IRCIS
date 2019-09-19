@@ -13,5 +13,5 @@ include_directories(.)
 
 # Have a copy of the executable in the project root
 add_custom_command(TARGET ptrain POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:ptrain> ${PROJECT_SOURCE_DIR}
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:ptrain> ${PROJECT_SOURCE_DIR}/
   )

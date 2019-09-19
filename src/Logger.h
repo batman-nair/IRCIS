@@ -10,7 +10,7 @@
 #define PR(x) (#x) << ": " << x << " "
 #else
 #define DBG(x) ;
-#define PR(x) ;
+#define PR(x)
 #endif
 
 namespace PTrain {

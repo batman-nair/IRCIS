@@ -12,6 +12,12 @@ namespace PTrain {
 	}
       }
 
+      while (!new_runners_list_->empty()) {
+	keep_moving = true;
+	runner_list_.emplace_back(new_runners_list_->front(), grid_, log_, new_runners_list_);
+	new_runners_list_->pop();
+      }
+
       if (!keep_moving) {
 	log_->print_line(" ");
 	DBG("PTrain has finished running!");

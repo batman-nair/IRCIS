@@ -8,7 +8,8 @@ add_executable(ptrain
   DataType.cc
   )
 
-target_compile_options(ptrain PRIVATE -Wall)
+target_compile_options(ptrain PRIVATE -Wall -Wextra -Wpedantic -Werror)
+
 include_directories(.)
 
 # Have a copy of the executable in the project root

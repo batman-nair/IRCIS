@@ -1,11 +1,9 @@
 #pragma once
 
-#include <DataType.h>
-
 #include <iostream>
 #include <string>
 
-#ifdef NDEBUG
+#ifndef NDEBUG
 #define DBG(x) std::cout << "DEBUG: " << x << std::endl;
 #define PR(x) (#x) << ": " << x << " "
 #else

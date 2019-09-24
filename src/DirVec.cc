@@ -16,8 +16,8 @@ namespace PTrain {
     int dx = 0, dy = 0;
     switch (direction) {
     case NORTH: dy = -1;    break;
-    case EAST:  dx = 1;     break;
-    case WEST:  dx = -1;    break;
+    case EAST:  dx = -1;     break;
+    case WEST:  dx = 1;    break;
     case SOUTH: dy = 1;     break;
     }
 

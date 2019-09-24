@@ -19,6 +19,9 @@ namespace PTrain {
       std::cout << val;
     }
 
+    void print_line() {
+      std::cout << std::endl;
+    }
     template <class T>
     void print_line(T val) {
       std::cout << val << std::endl;

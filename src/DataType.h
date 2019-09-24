@@ -3,7 +3,7 @@
 namespace PTrain {
   struct DataType {
 
-  DataType(int value, bool is_integer)
+  DataType(int value, bool is_integer=false)
     : value(value), is_integer(is_integer) { }
 
     int value;

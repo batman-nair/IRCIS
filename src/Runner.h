@@ -32,6 +32,9 @@ namespace PTrain {
     bool step();
 
   private:
+    // Return Ture if character has been processed
+    bool process_char(char current_char);
+
     DirVec position_;
 
     std::shared_ptr<Logger> log_;

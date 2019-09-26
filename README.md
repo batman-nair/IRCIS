@@ -25,21 +25,22 @@ Each Runner has a stack which is it's main source of memory.
 
 ## Character commands list ##
 
-| Character | Commands                           |
-|:---------:|:----------------------------------:|
-| < > ^ v   | Movement control                   |
-| + - * /   | Arithmetic Ops in stack            |
-| $         | Print Newline                      |
-| !         | End Processing                     |
-| @         | Access Memory and push to stack    |
-| &         | Push from stack to Memory          |
-| <space> . | Blanks, Ignored                    |
-| ,         | Like blank but preserves direction |
-| &&        | Pop stack                          |
-| "         | Toggles stack push mode            |
-| '         | Goes to *Integer* mode             |
-| #         | Print stack value to output        |
-|           |                                    |
+| Character | Commands                                                     |
+|:---------:|:------------------------------------------------------------:|
+| < > ^ v   | Movement control                                             |
+| + - * /   | Arithmetic Ops in stack                                      |
+| $         | Print Newline                                                |
+| !         | End Processing                                               |
+| @         | Access Memory and push to stack                              |
+| &         | Push from stack to Memory                                    |
+| <space> . | Blanks, Ignored                                              |
+| ,         | Like blank but preserves direction                           |
+| &&        | Pop stack                                                    |
+| "         | Toggles stack push mode                                      |
+| '         | Goes to *Integer* mode                                       |
+| #         | Print stack value to output                                  |
+| ?         | Check stack top, if true continue in direction else go right |
+|           |                                                              |
 
 ## Classes ##
 - PTrain

@@ -13,12 +13,12 @@ namespace PTrain {
     int get(std::size_t xx, std::size_t yy) const {
       return lines_[yy][xx];
     }
-    int is_inside(std::size_t xx, std::size_t yy) const {
+    bool is_inside(std::size_t xx, std::size_t yy) const {
       if (xx > width_ || yy > height_) // Unsigned,, so always > 0
 	return false;
       return true;
     }
-    int is_inside(const DirVec& pos) const {
+    bool is_inside(const DirVec& pos) const {
       if (pos.get_x() > width_ || pos.get_y() > height_) // Unsigned,, so always > 0
 	return false;
       return true;

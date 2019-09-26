@@ -8,6 +8,9 @@ namespace PTrain {
 
     int value;
     bool is_integer;
+
+    // Return character equivalent of the data stored
+    char getc() const;
   };
 
   typedef DataType Data;

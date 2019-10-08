@@ -1,7 +1,8 @@
 #pragma once
 
-#include <DirVec.h>
 #include <DataType.h>
+#include <RunnerStack.h>
+#include <DirVec.h>
 #include <Logger.h>
 #include <Grid.h>
 
@@ -59,7 +60,7 @@ namespace PTrain {
     std::shared_ptr<Grid> grid_;
     std::shared_ptr<std::queue<DirVec> > new_runners_list_;
 
-    std::stack<Data> st_;
+    RunnerStack st_;
     Mode mode_;
     bool integer_mode_;
     std::string mode_buffer_;

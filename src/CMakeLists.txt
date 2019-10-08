@@ -5,6 +5,7 @@ add_executable(ptrain
   Grid.cc
   Logger.cc
   DirVec.cc
+  RunnerStack.cc
   DataType.cc
   )
 

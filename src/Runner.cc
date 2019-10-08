@@ -31,8 +31,6 @@ namespace PTrain {
 	if (!process_mode_buffer())
 	  return false;
       }
-      Data data(current_char);
-      st_.push(data);
     }
     else if (!process_char(current_char)) {
       // Character could not be processed
@@ -84,14 +82,27 @@ namespace PTrain {
     return true;
   }
 
+  bool Runner::process_integer_buffer() {
+    // TODO
+    return false;
+  }
+
   bool Runner::process_mode_buffer() {
     switch(mode_) {
     case NONE:
       DBG("Shouldn't reach process_mode_buffer with NONE mode");
-      DBG("mode value: " << mode_);
       return false;
     case STACK:
-      // TODO: with custom stack
+      for (char ch: mode_buffer_) {
+	Data data(ch);
+	st_.push(data);
+      }
+
+      mode_buffer_.clear();
+      mode_ = Mode::NONE;
+      return true;
+    default:
+      DBG("Unknown mode_ value specified. mode_: " << mode_);
       return false;
     }
   }

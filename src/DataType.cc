@@ -3,11 +3,11 @@
 #include <ostream>
 
 namespace PTrain {
-  char DataType::getc() const {
-    return value + (is_integer? '0':0);
+  std::string DataType::to_string() const {
+    return is_integer? std::to_string(value) : std::string(1, (char)value);
   }
 
   std::ostream& operator<<(std::ostream& os, const Data& data) {
-    return os << data.getc();
+    return os << data.to_string();
   }
 }

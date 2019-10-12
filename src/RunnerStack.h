@@ -19,6 +19,7 @@ namespace PTrain {
     void push(const Data data) { container_.push_back(data); }
     const Data& top() const { return container_.back(); }
     Data& top() { return container_.back(); }
+    size_t size() { return container_.size(); }
     void pop() { container_.pop_back(); }
     bool empty() { return container_.empty(); }
   private:

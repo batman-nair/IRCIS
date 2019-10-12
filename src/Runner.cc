@@ -83,8 +83,63 @@ namespace PTrain {
   }
 
   bool Runner::process_integer_buffer() {
-    // TODO
-    return false;
+    auto it = integer_mode_buffer_.begin();
+    ++it;			// Skip starting quote char
+    char start_ch = *it;
+    ++it;
+    if (isdigit(start_ch)) {	// Integer processing
+      int num = start_ch - '0';
+      while (it != integer_mode_buffer_.end()) {
+	char ch = *it++;
+	if (!isdigit(ch)) {
+	  DBG("Non integer character in integer processing.");
+	  return false;
+	}
+	num = num*10 + (ch-'0');
+      }
+      Data dat(num, true);
+      st_.push(dat);
+    }
+    else {
+      const std::string arith_ops = "+-/*%";
+      if (arith_ops.find(start_ch) != std::string::npos) {
+	if (st_.size() < 2) {
+	  DBG("Not enough elements for arithmetic operation");
+	  return false;
+	}
+	Data num1 = st_.top();
+	st_.pop();
+	Data num2 = st_.top();
+	st_.pop();
+	if (num1.is_integer && num2.is_integer) {
+	  switch(start_ch) {
+	  case '+':
+	    num1 = num1 + num2;
+	    break;
+	  case '-':
+	    num1 = num1 - num2;
+	    break;
+	  case '*':
+	    num1 = num1 * num2;
+	    break;
+	  case '/':
+	    num1 = num1 / num2;
+	    break;
+	  case '%':
+	    num1 = num1 % num2;
+	    break;
+	  default:
+	    DBG("Unknown arithmetic op found");
+	    return false;
+	  };
+	  st_.push(num1);
+	}
+      }
+    }
+
+    integer_mode_ = false;
+    integer_mode_buffer_.clear();
+    return true;
   }
 
   bool Runner::process_mode_buffer() {

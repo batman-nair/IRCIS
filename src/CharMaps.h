@@ -12,30 +12,30 @@
 
 namespace PTrain {
   // Character defines
-#define MOVE_NORTH '^'
-#define MOVE_SOUTH 'v'
-#define MOVE_EAST '>'
-#define MOVE_WEST '<'
+#define CH_NORTH '^'
+#define CH_SOUTH 'v'
+#define CH_EAST '>'
+#define CH_WEST '<'
 
-#define ARITH_ADD '+'
-#define ARITH_SUB '-'
-#define ARITH_MUL '*'
-#define ARITH_DIV '/'
-#define ARITH_MOD '%'
+#define CH_ADD '+'
+#define CH_SUB '-'
+#define CH_MUL '*'
+#define CH_DIV '/'
+#define CH_MOD '%'
 
-#define PRINT_CHAR '#'
-#define PRINT_ENDL '$'
+#define CH_PRINT '#'
+#define CH_ENDL '$'
 
-#define STACK_PUSH '@'
-#define STACK_POP '&'
+#define CH_PUSH '@'
+#define CH_POP '&'
 
-#define STACK_MODE '"'
-#define INT_MODE '\''
+#define CH_STACK '"'
+#define CH_INT '\''
 
-#define BLANK_DOT '.'
-#define BLANK_SPC ' '
+#define CH_DOT '.'
+#define CH_SPC ' '
 
-#define END_PROC '!'
+#define CH_END '!'
 
   // Group defines
   DEF_CHAR_GROUP_DECL(arith);

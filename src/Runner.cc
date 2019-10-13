@@ -10,8 +10,8 @@ namespace PTrain {
     int current_char = grid_->get(position_.get_x(), position_.get_y());
 
     // --- Integer mode related processing ---
-    if (integer_mode_ || current_char == INT_MODE) {
-      if (integer_mode_ && current_char == INT_MODE) {
+    if (integer_mode_ || current_char == CH_INT) {
+      if (integer_mode_ && current_char == CH_INT) {
 	DBG("Invalid character in integer mode");
 	return false;
       }
@@ -47,28 +47,31 @@ namespace PTrain {
   // Simple character processing when not in any mode
   bool Runner::process_char(char current_char) {
     switch(current_char) {
-    case STACK_MODE:
+    case CH_STACK:
       mode_ = Mode::STACK;
       stack_mode_ = !stack_mode_;
       break;
-    case MOVE_WEST:
+    case CH_WEST:
       position_.change_dir(Direction::WEST);
       break;
-    case MOVE_NORTH:
+    case CH_NORTH:
       position_.change_dir(Direction::NORTH);
       break;
-    case MOVE_EAST:
+    case CH_EAST:
       position_.change_dir(Direction::EAST);
       break;
-    case MOVE_SOUTH:
+    case CH_SOUTH:
       position_.change_dir(Direction::SOUTH);
       break;
-    case PRINT_ENDL:
+    case CH_POP:
+      mode_ = Mode::STACK_POP;
+      break;
+    case CH_ENDL:
       log_->print_line();
       break;
-    case END_PROC:
+    case CH_END:
       return false;
-    case PRINT_CHAR:
+    case CH_PRINT:
       if (st_.empty()) {
 	log_->print_line();
 	DBG("Stack is empty, forcing exit.");
@@ -101,8 +104,7 @@ namespace PTrain {
       st_.push(dat);
     }
     else {
-      const std::string arith_ops = "+-/*%";
-      if (arith_ops.find(start_ch) != std::string::npos) {
+      if (is_arith(start_ch)) {
 	if (st_.size() < 2) {
 	  DBG("Not enough elements for arithmetic operation");
 	  return false;
@@ -113,19 +115,19 @@ namespace PTrain {
 	st_.pop();
 	if (num1.is_integer && num2.is_integer) {
 	  switch(start_ch) {
-	  case '+':
+	  case CH_ADD:
 	    num1 = num1 + num2;
 	    break;
-	  case '-':
+	  case CH_SUB:
 	    num1 = num1 - num2;
 	    break;
-	  case '*':
+	  case CH_MUL:
 	    num1 = num1 * num2;
 	    break;
-	  case '/':
+	  case CH_DIV:
 	    num1 = num1 / num2;
 	    break;
-	  case '%':
+	  case CH_MOD:
 	    num1 = num1 % num2;
 	    break;
 	  default:

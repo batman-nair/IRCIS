@@ -15,14 +15,16 @@
 namespace PTrain {
   enum Mode {
 	     NONE = 0,
-	     STACK
+	     STACK,
+	     STACK_POP
   };
 
   // String of characters that end the mode
   static std::unordered_map<Mode, std::string>
   mode_end_chars = {
 		    { NONE, "" },
-		    { STACK, { STACK_MODE } }
+		    { STACK, { CH_STACK } },
+		    { STACK_POP, { CH_DOT, CH_SPC } }
   };
 
   bool is_mode_end_char(Mode mode, char current_char);

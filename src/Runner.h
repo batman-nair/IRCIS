@@ -16,7 +16,8 @@ namespace PTrain {
   enum Mode {
 	     NONE = 0,
 	     STACK,
-	     STACK_POP
+	     STACK_POP,
+	     STACK_PUSH
   };
 
   // String of characters that end the mode
@@ -24,6 +25,7 @@ namespace PTrain {
   mode_end_chars = {
 		    { NONE, "" },
 		    { STACK, { CH_STACK } },
+		    { STACK_PUSH, { CH_DOT, CH_SPC } },
 		    { STACK_POP, { CH_DOT, CH_SPC } }
   };
 

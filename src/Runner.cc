@@ -24,6 +24,7 @@ namespace PTrain {
 	  return false;
       }
     }
+    // --- Mode processing ---
     else if (mode_ != Mode::NONE) {
       if (!is_mode_end_char(mode_, current_char))
 	mode_buffer_.push_back(current_char);
@@ -32,11 +33,13 @@ namespace PTrain {
 	  return false;
       }
     }
+    // --- Any other char processing ---
     else if (!process_char(current_char)) {
       // Character could not be processed
       return false;
     }
 
+    // --- Update Runner position after processing ---
     position_.update();
     if (!grid_->is_inside(position_.get_x(), position_.get_y()))
       return false;
@@ -62,6 +65,9 @@ namespace PTrain {
       break;
     case CH_SOUTH:
       position_.change_dir(Direction::SOUTH);
+      break;
+    case CH_PUSH:
+      mode_ = Mode::STACK_PUSH;
       break;
     case CH_POP:
       mode_ = Mode::STACK_POP;
@@ -150,18 +156,53 @@ namespace PTrain {
       DBG("Shouldn't reach process_mode_buffer with NONE mode");
       return false;
     case STACK:
-      for (char ch: mode_buffer_) {
-	Data data(ch);
-	st_.push(data);
+      {
+	for (char ch: mode_buffer_) {
+	  Data data(ch);
+	  st_.push(data);
+	}
+	break;
       }
-
-      mode_buffer_.clear();
-      mode_ = Mode::NONE;
-      return true;
+    case STACK_PUSH:
+      {
+	int num = 0;
+	for (char ch: mode_buffer_) {
+	  if (!isdigit(ch)) {
+	    DBG("Invalid character in Stack Pop mode!");
+	    return false;
+	  }
+	  num = num*10 + (ch-'0');
+	}
+	Data temp = st_[-num];
+	st_.push(temp);
+	break;
+      }
+    case STACK_POP:
+      {
+	int num = 0;
+	for (char ch: mode_buffer_) {
+	  if (!isdigit(ch)) {
+	    DBG("Invalid character in Stack Pop mode!");
+	    return false;
+	  }
+	  num = num*10 + (ch-'0');
+	}
+	for (int ii = 0; ii < num; ++ii) {
+	  if (st_.empty()) {
+	    DBG("Stack pop preemptive finish");
+	    break;
+	  }
+	  st_.pop();
+	}
+	break;
+      }
     default:
       DBG("Unknown mode_ value specified. mode_: " << mode_);
       return false;
     }
+    mode_buffer_.clear();
+    mode_ = Mode::NONE;
+    return true;
   }
 
 

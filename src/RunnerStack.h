@@ -11,8 +11,10 @@ namespace PTrain {
     Data& operator[](int index) {
       if (index > 0)
 	return container_[index];
-      else
+      else {
+	index -= 1;
 	return container_.end()[index];
+      }
     }
 
     // Stack functions

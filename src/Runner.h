@@ -1,5 +1,6 @@
 #pragma once
 
+#include <CharMaps.h>
 #include <DataType.h>
 #include <RunnerStack.h>
 #include <DirVec.h>
@@ -21,7 +22,7 @@ namespace PTrain {
   static std::unordered_map<Mode, std::string>
   mode_end_chars = {
 		    { NONE, "" },
-		    { STACK, "\"" }
+		    { STACK, { STACK_MODE } }
   };
 
   bool is_mode_end_char(Mode mode, char current_char);

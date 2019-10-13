@@ -10,14 +10,14 @@ namespace PTrain {
     int current_char = grid_->get(position_.get_x(), position_.get_y());
 
     // --- Integer mode related processing ---
-    if (integer_mode_ || current_char == '\'') {
-      if (integer_mode_ && current_char == '\'') {
+    if (integer_mode_ || current_char == INT_MODE) {
+      if (integer_mode_ && current_char == INT_MODE) {
 	DBG("Invalid character in integer mode");
 	return false;
       }
 
       integer_mode_ = true;
-      if (current_char != '.')
+      if (!is_blank(current_char))
 	integer_mode_buffer_.push_back(current_char);
       else {
 	if (!process_integer_buffer())
@@ -47,28 +47,28 @@ namespace PTrain {
   // Simple character processing when not in any mode
   bool Runner::process_char(char current_char) {
     switch(current_char) {
-    case '"':
+    case STACK_MODE:
       mode_ = Mode::STACK;
       stack_mode_ = !stack_mode_;
       break;
-    case '<':
-      position_.change_dir(Direction::EAST);
-      break;
-    case '^':
-      position_.change_dir(Direction::NORTH);
-      break;
-    case '>':
+    case MOVE_WEST:
       position_.change_dir(Direction::WEST);
       break;
-    case 'v':
+    case MOVE_NORTH:
+      position_.change_dir(Direction::NORTH);
+      break;
+    case MOVE_EAST:
+      position_.change_dir(Direction::EAST);
+      break;
+    case MOVE_SOUTH:
       position_.change_dir(Direction::SOUTH);
       break;
-    case '$':
+    case PRINT_ENDL:
       log_->print_line();
       break;
-    case '!':
+    case END_PROC:
       return false;
-    case '#':
+    case PRINT_CHAR:
       if (st_.empty()) {
 	log_->print_line();
 	DBG("Stack is empty, forcing exit.");

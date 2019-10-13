@@ -7,6 +7,7 @@ add_executable(ptrain
   DirVec.cc
   RunnerStack.cc
   DataType.cc
+  CharMaps.cc
   )
 
 target_compile_options(ptrain PRIVATE -Wall -Wextra -Wpedantic -Werror)

@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
   PTrain::PTrain ptrain(file_name);
   while (ptrain.update());
 
-  DBG("Program has finished running");
+  PTrain::Logger::log_line("Program has finished running");
 
   return 0;
 }

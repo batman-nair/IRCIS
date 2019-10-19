@@ -20,7 +20,7 @@ namespace PTrain {
 
       if (!keep_moving) {
 	log_->print_line(" ");
-	DBG("PTrain has finished running!");
+	Logger::log_line("PTrain has finished running!");
       }
       return keep_moving;
   }

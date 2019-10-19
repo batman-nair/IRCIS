@@ -12,7 +12,7 @@ namespace PTrain {
     // --- Integer mode related processing ---
     if (integer_mode_ || current_char == CH_INT) {
       if (integer_mode_ && current_char == CH_INT) {
-	DBG("Invalid character in integer mode");
+	Logger::log_line("Invalid character in integer mode");
 	return false;
       }
 
@@ -80,7 +80,7 @@ namespace PTrain {
     case CH_PRINT:
       if (st_.empty()) {
 	log_->print_line();
-	DBG("Stack is empty, forcing exit.");
+	Logger::log_line("Stack is empty, forcing exit.");
 	return false;
       }
       auto top = st_.top();
@@ -101,7 +101,7 @@ namespace PTrain {
       while (it != integer_mode_buffer_.end()) {
 	char ch = *it++;
 	if (!isdigit(ch)) {
-	  DBG("Non integer character in integer processing.");
+	  Logger::log_line("Non integer character in integer processing.");
 	  return false;
 	}
 	num = num*10 + (ch-'0');
@@ -112,7 +112,7 @@ namespace PTrain {
     else {
       if (is_arith(start_ch)) {
 	if (st_.size() < 2) {
-	  DBG("Not enough elements for arithmetic operation");
+	  Logger::log_line("Not enough elements for arithmetic operation");
 	  return false;
 	}
 	Data num1 = st_.top();
@@ -137,7 +137,7 @@ namespace PTrain {
 	    num1 = num1 % num2;
 	    break;
 	  default:
-	    DBG("Unknown arithmetic op found");
+	    Logger::log_line("Unknown arithmetic op found");
 	    return false;
 	  };
 	  st_.push(num1);
@@ -153,7 +153,7 @@ namespace PTrain {
   bool Runner::process_mode_buffer() {
     switch(mode_) {
     case NONE:
-      DBG("Shouldn't reach process_mode_buffer with NONE mode");
+      Logger::log_line("Shouldn't reach process_mode_buffer with NONE mode");
       return false;
     case STACK:
       {
@@ -168,7 +168,7 @@ namespace PTrain {
 	int num = 0;
 	for (char ch: mode_buffer_) {
 	  if (!isdigit(ch)) {
-	    DBG("Invalid character in Stack Pop mode!");
+	    Logger::log_line("Invalid character in Stack Pop mode!");
 	    return false;
 	  }
 	  num = num*10 + (ch-'0');
@@ -182,14 +182,14 @@ namespace PTrain {
 	int num = 0;
 	for (char ch: mode_buffer_) {
 	  if (!isdigit(ch)) {
-	    DBG("Invalid character in Stack Pop mode!");
+	    Logger::log_line("Invalid character in Stack Pop mode!");
 	    return false;
 	  }
 	  num = num*10 + (ch-'0');
 	}
 	for (int ii = 0; ii < num; ++ii) {
 	  if (st_.empty()) {
-	    DBG("Stack pop preemptive finish");
+	    Logger::log_line("Stack pop preemptive finish");
 	    break;
 	  }
 	  st_.pop();
@@ -197,7 +197,7 @@ namespace PTrain {
 	break;
       }
     default:
-      DBG("Unknown mode_ value specified. mode_: " << mode_);
+      Logger::log_line("Unknown mode_ value specified. mode_: ", mode_);
       return false;
     }
     mode_buffer_.clear();

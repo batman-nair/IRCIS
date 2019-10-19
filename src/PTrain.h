@@ -12,7 +12,7 @@ namespace PTrain {
   class PTrain {
   public:
     PTrain(std::string file_name)
-      :grid_(std::make_shared<Grid>(file_name)), log_(std::make_shared<Logger>()),
+      :grid_(std::make_shared<Grid>(file_name)), log_(std::make_shared<Logger>("output.log")),
       new_runners_list_(std::make_shared<std::queue<DirVec> >()) {
       runner_list_.emplace_back(grid_, log_, new_runners_list_);
     }

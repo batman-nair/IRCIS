@@ -14,13 +14,13 @@ namespace PTrain {
 
       while (!new_runners_list_->empty()) {
 	keep_moving = true;
-	runner_list_.emplace_back(new_runners_list_->front(), grid_, log_, new_runners_list_);
+	runner_list_.emplace_back(runner_id_++, new_runners_list_->front(), grid_, log_, new_runners_list_);
 	new_runners_list_->pop();
       }
 
       if (!keep_moving) {
 	log_->print_line(" ");
-	Logger::log_line("PTrain has finished running!");
+	Logger::log_line_dbg("PTrain has finished running!");
       }
       return keep_moving;
   }

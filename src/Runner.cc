@@ -1,6 +1,7 @@
 #include <Runner.h>
 
 #include <cctype>
+#include <sstream>
 
 namespace PTrain {
 
@@ -8,11 +9,12 @@ namespace PTrain {
   // Returns false if Runner is dead
   bool Runner::step() {
     int current_char = grid_->get(position_.get_x(), position_.get_y());
+    processed_chars_.push_back(current_char);
 
     // --- Integer mode related processing ---
     if (integer_mode_ || current_char == CH_INT) {
       if (integer_mode_ && current_char == CH_INT) {
-	Logger::log_line("Invalid character in integer mode");
+	set_error("Quote character is invalid in integer mode");
 	return false;
       }
 
@@ -41,8 +43,10 @@ namespace PTrain {
 
     // --- Update Runner position after processing ---
     position_.update();
-    if (!grid_->is_inside(position_.get_x(), position_.get_y()))
+    if (!grid_->is_inside(position_.get_x(), position_.get_y())) {
+      set_error("Runner went outside grid");
       return false;
+    }
 
     return true;
   }
@@ -76,11 +80,12 @@ namespace PTrain {
       log_->print_line();
       break;
     case CH_END:
+      set_error("End character reached");
       return false;
     case CH_PRINT:
       if (st_.empty()) {
 	log_->print_line();
-	Logger::log_line("Stack is empty, forcing exit.");
+	set_error("Stack is empty, forcing exit.");
 	return false;
       }
       auto top = st_.top();
@@ -101,7 +106,7 @@ namespace PTrain {
       while (it != integer_mode_buffer_.end()) {
 	char ch = *it++;
 	if (!isdigit(ch)) {
-	  Logger::log_line("Non integer character in integer processing.");
+	  set_error("Non integer character in integer processing.");
 	  return false;
 	}
 	num = num*10 + (ch-'0');
@@ -112,7 +117,7 @@ namespace PTrain {
     else {
       if (is_arith(start_ch)) {
 	if (st_.size() < 2) {
-	  Logger::log_line("Not enough elements for arithmetic operation");
+	  set_error("Not enough elements for arithmetic operation");
 	  return false;
 	}
 	Data num1 = st_.top();
@@ -131,13 +136,17 @@ namespace PTrain {
 	    num1 = num1 * num2;
 	    break;
 	  case CH_DIV:
+	    if (num2.value == 0) {
+	      set_error("Division by zero error");
+	      return false;
+	    }
 	    num1 = num1 / num2;
 	    break;
 	  case CH_MOD:
 	    num1 = num1 % num2;
 	    break;
 	  default:
-	    Logger::log_line("Unknown arithmetic op found");
+	    set_error("Unknown arithmetic op found");
 	    return false;
 	  };
 	  st_.push(num1);
@@ -153,7 +162,7 @@ namespace PTrain {
   bool Runner::process_mode_buffer() {
     switch(mode_) {
     case NONE:
-      Logger::log_line("Shouldn't reach process_mode_buffer with NONE mode");
+      set_error("Shouldn't reach process_mode_buffer with NONE mode");
       return false;
     case STACK:
       {
@@ -168,7 +177,7 @@ namespace PTrain {
 	int num = 0;
 	for (char ch: mode_buffer_) {
 	  if (!isdigit(ch)) {
-	    Logger::log_line("Invalid character in Stack Pop mode!");
+	    set_error("Invalid character in Stack Pop mode!");
 	    return false;
 	  }
 	  num = num*10 + (ch-'0');
@@ -182,7 +191,7 @@ namespace PTrain {
 	int num = 0;
 	for (char ch: mode_buffer_) {
 	  if (!isdigit(ch)) {
-	    Logger::log_line("Invalid character in Stack Pop mode!");
+	    set_error("Invalid character in Stack Pop mode!");
 	    return false;
 	  }
 	  num = num*10 + (ch-'0');
@@ -197,7 +206,7 @@ namespace PTrain {
 	break;
       }
     default:
-      Logger::log_line("Unknown mode_ value specified. mode_: ", mode_);
+      set_error("Unknown mode_ value specified. mode_: ", mode_);
       return false;
     }
     mode_buffer_.clear();
@@ -205,6 +214,22 @@ namespace PTrain {
     return true;
   }
 
+  template<typename T>
+  std::string Runner::get_string_from_vars(T val) {
+    std::stringstream os;
+    os << val;
+    return os.str();
+  }
+  template<typename T, typename... Types>
+  std::string Runner::get_string_from_vars(T val, Types... vars) {
+    std::stringstream os;
+    os << val << get_string_from_vars(vars...);
+    return os.str();
+  }
+  template<typename... Types>
+  void Runner::set_error(Types... vars) {
+    err_str_ = get_string_from_vars(vars...);
+  }
 
   bool is_mode_end_char(Mode mode, char current_char) {
     if (mode_end_chars[mode].find(current_char) != std::string::npos)

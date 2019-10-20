@@ -34,18 +34,24 @@ namespace PTrain {
   class Runner {
   public:
 
-    Runner(DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
+    Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
 	   std::shared_ptr<std::queue<DirVec> > new_runners_list_)
-      : position_(init_pos), log_(log), grid_(grid), new_runners_list_(new_runners_list_) {
-      Logger::log_line("Created Runner at position ", position_);
+      : id_(id), position_(init_pos), log_(log), grid_(grid), new_runners_list_(new_runners_list_) {
+      Logger::log_line_dbg("Created Runner at position ", position_);
       mode_ = Mode::NONE;
       stack_mode_ = false;
       integer_mode_ = false;
     }
 
-    Runner(std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
+    Runner(int id, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
 	   std::shared_ptr<std::queue<DirVec> > new_runners_list_)
-      : Runner({}, grid, log, new_runners_list_) {
+      : Runner(id, {}, grid, log, new_runners_list_) {
+    }
+
+    ~Runner() {
+      Logger::log_line("Runner ", id_, " died");
+      Logger::log_line("Processed chars: ", processed_chars_);
+      Logger::err_line(err_str_);
     }
 
 
@@ -59,6 +65,14 @@ namespace PTrain {
     bool process_integer_buffer();
     bool process_mode_buffer();
 
+    template <typename T>
+    std::string get_string_from_vars(T val);
+    template <typename T, typename... Types>
+    std::string get_string_from_vars(T val, Types... vars);
+    template <typename... Types>
+    void set_error(Types... vars);
+
+    int id_ = 0;
     DirVec position_;
 
     std::shared_ptr<Logger> log_;
@@ -72,5 +86,7 @@ namespace PTrain {
     std::string integer_mode_buffer_;
 
     bool stack_mode_;
+    std::string err_str_;
+    std::string processed_chars_;
   };
 }

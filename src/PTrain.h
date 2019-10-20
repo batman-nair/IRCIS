@@ -14,7 +14,7 @@ namespace PTrain {
     PTrain(std::string file_name)
       :grid_(std::make_shared<Grid>(file_name)), log_(std::make_shared<Logger>("output.log")),
       new_runners_list_(std::make_shared<std::queue<DirVec> >()) {
-      runner_list_.emplace_back(grid_, log_, new_runners_list_);
+      runner_list_.emplace_back(runner_id_++, grid_, log_, new_runners_list_);
     }
 
     // Steps all runner instances
@@ -23,6 +23,7 @@ namespace PTrain {
     bool update();
 
   private:
+    int runner_id_ = 0;
     std::shared_ptr<Grid> grid_;
     std::shared_ptr<Logger> log_;
     std::vector<Runner> runner_list_;

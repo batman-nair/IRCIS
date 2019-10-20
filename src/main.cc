@@ -3,7 +3,6 @@
 #include <PTrain.h>
 
 #include <iostream>
-#include <memory>
 
 int main(int argc, char *argv[]) {
 
@@ -18,7 +17,7 @@ int main(int argc, char *argv[]) {
   PTrain::PTrain ptrain(file_name);
   while (ptrain.update());
 
-  PTrain::Logger::log_line("Program has finished running");
+  PTrain::Logger::log_line_dbg("Program has finished running");
 
   return 0;
 }

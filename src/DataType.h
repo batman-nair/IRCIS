@@ -34,4 +34,6 @@ namespace PTrain {
   };
 
   typedef DataType Data;
+
+  std::ostream& operator<<(std::ostream& os, const Data& data);
 }

@@ -12,8 +12,9 @@ namespace PTrain {
   class PTrain {
   public:
     PTrain(std::string file_name)
-      :grid_(std::make_shared<Grid>(file_name)), log_(std::make_shared<Logger>("output.log")),
-      new_runners_list_(std::make_shared<std::queue<DirVec> >()) {
+      :runner_id_(0), grid_(std::make_shared<Grid>(file_name)),
+       log_(std::make_shared<Logger>("output.log")),
+       new_runners_list_(std::make_shared<std::queue<RunnerInfo> >()) {
       runner_list_.emplace_back(runner_id_++, grid_, log_, new_runners_list_);
     }
 
@@ -23,11 +24,11 @@ namespace PTrain {
     bool update();
 
   private:
-    int runner_id_ = 0;
+    int runner_id_;
     std::shared_ptr<Grid> grid_;
     std::shared_ptr<Logger> log_;
     std::vector<Runner> runner_list_;
 
-    std::shared_ptr<std::queue<DirVec> > new_runners_list_;
+    std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_;
   };
 }

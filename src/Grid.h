@@ -10,7 +10,10 @@ namespace PTrain {
   public:
     Grid(std::string file_name);
 
-    int get(std::size_t xx, std::size_t yy) const {
+    char get(const DirVec& pos) const {
+      return lines_[pos.get_y()][pos.get_x()];
+    }
+    char get(std::size_t xx, std::size_t yy) const {
       return lines_[yy][xx];
     }
     bool is_inside(std::size_t xx, std::size_t yy) const {

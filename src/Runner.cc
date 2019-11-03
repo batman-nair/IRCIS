@@ -4,6 +4,18 @@
 #include <sstream>
 
 namespace PTrain {
+  void Runner::run_debug() {
+    Logger::log_line("Runner ", id_, " died");
+    Logger::log_line("Processed chars: ", processed_chars_);
+    Logger::err_line(err_str_);
+    std::ostringstream os;
+    while (!st_.empty()) {
+      os << st_.top().to_string() << ", ";
+      Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
+      st_.pop();
+    }
+    Logger::log_line("Stack values: ", os.str());
+  }
 
   // Step function processes the current char for Runner and moves it a step
   // Returns false if Runner is dead
@@ -38,12 +50,13 @@ namespace PTrain {
     // --- Any other char processing ---
     else if (!process_char(current_char)) {
       // Character could not be processed
+      Logger::err_line("Character could not be processed");
       return false;
     }
 
     // --- Update Runner position after processing ---
     position_.update();
-    if (!grid_->is_inside(position_.get_x(), position_.get_y())) {
+    if (!grid_->is_inside(position_)) {
       set_error("Runner went outside grid");
       return false;
     }
@@ -79,6 +92,11 @@ namespace PTrain {
     case CH_ENDL:
       log_->print_line();
       break;
+    case CH_SPLIT:
+      if (!process_split()) {
+	return false;
+      }
+      break;
     case CH_END:
       set_error("End character reached");
       return false;
@@ -89,6 +107,7 @@ namespace PTrain {
 	return false;
       }
       auto top = st_.top();
+      Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
       st_.pop();
       log_->print(top.to_string());
       break;
@@ -112,6 +131,7 @@ namespace PTrain {
 	num = num*10 + (ch-'0');
       }
       Data dat(num, true);
+      Logger::log_line_dbg("Pushing value to stack", get_id(), ": ", dat);
       st_.push(dat);
     }
     else {
@@ -121,8 +141,10 @@ namespace PTrain {
 	  return false;
 	}
 	Data num1 = st_.top();
+	Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
 	st_.pop();
 	Data num2 = st_.top();
+	Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
 	st_.pop();
 	if (num1.is_integer && num2.is_integer) {
 	  switch(start_ch) {
@@ -136,6 +158,7 @@ namespace PTrain {
 	    num1 = num1 * num2;
 	    break;
 	  case CH_DIV:
+	    Logger::log_line_dbg("dividing ", num1, " by ", num2, ": ", num2.value);
 	    if (num2.value == 0) {
 	      set_error("Division by zero error");
 	      return false;
@@ -149,6 +172,7 @@ namespace PTrain {
 	    set_error("Unknown arithmetic op found");
 	    return false;
 	  };
+	  Logger::log_line_dbg("Pushing value to stack", get_id(), ": ", num1);
 	  st_.push(num1);
 	}
       }
@@ -168,6 +192,7 @@ namespace PTrain {
       {
 	for (char ch: mode_buffer_) {
 	  Data data(ch);
+	  Logger::log_line_dbg("Pushing value to stack", get_id(), ": ", data);
 	  st_.push(data);
 	}
 	break;
@@ -183,6 +208,7 @@ namespace PTrain {
 	  num = num*10 + (ch-'0');
 	}
 	Data temp = st_[-num];
+	Logger::log_line_dbg("Pushing value to stack", get_id(), ": ", temp);
 	st_.push(temp);
 	break;
       }
@@ -201,6 +227,7 @@ namespace PTrain {
 	    Logger::log_line("Stack pop preemptive finish");
 	    break;
 	  }
+	  Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
 	  st_.pop();
 	}
 	break;
@@ -211,6 +238,66 @@ namespace PTrain {
     }
     mode_buffer_.clear();
     mode_ = Mode::NONE;
+    return true;
+  }
+
+  bool Runner::process_split() {
+    DirVec curr_position = position_;
+    DirVec temp = curr_position;
+    Logger::log_line("Got split at ", temp);
+    bool create_runner = false;
+    temp.change_dir(Direction::EAST);
+    temp.update();
+    if (grid_->is_inside(temp))
+      Logger::log_line("EAST char: ", grid_->get(temp));
+    if (grid_->is_inside(temp) && grid_->get(temp) == CH_EAST) {
+      if (!create_runner) {
+	position_.change_dir(Direction::EAST);
+	create_runner = true;
+      }
+      else
+	new_runners_list_->push({temp, st_});
+    }
+    temp = curr_position;
+    temp.change_dir(Direction::NORTH);
+    temp.update();
+    if (grid_->is_inside(temp))
+      Logger::log_line("NORTH char: ", grid_->get(temp));
+    if (grid_->is_inside(temp) && grid_->get(temp) == CH_NORTH) {
+      if (!create_runner) {
+	position_.change_dir(Direction::NORTH);
+	create_runner = true;
+      }
+      else
+	new_runners_list_->push({temp, st_});
+    }
+    temp = curr_position;
+    temp.change_dir(Direction::SOUTH);
+    temp.update();
+    if (grid_->is_inside(temp))
+      Logger::log_line("SOUTH char: ", grid_->get(temp));
+    if (grid_->is_inside(temp) && grid_->get(temp) == CH_SOUTH) {
+      if (!create_runner) {
+	position_.change_dir(Direction::SOUTH);
+	create_runner = true;
+      }
+      else
+	new_runners_list_->push({temp, st_});
+    }
+    temp = curr_position;
+    temp.change_dir(Direction::WEST);
+    temp.update();
+    if (grid_->is_inside(temp))
+      Logger::log_line("WEST char: ", grid_->get(temp));
+    if (grid_->is_inside(temp) && grid_->get(temp) == CH_WEST) {
+      if (!create_runner) {
+	position_.change_dir(Direction::WEST);
+	create_runner = true;
+      }
+      else
+	new_runners_list_->push({temp, st_});
+    }
+    Logger::log_line("Finished split processing");
     return true;
   }
 

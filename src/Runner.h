@@ -31,39 +31,45 @@ namespace PTrain {
 
   bool is_mode_end_char(Mode mode, char current_char);
 
+  struct RunnerInfo {
+    DirVec position;
+    RunnerStack st;
+  };
+
   class Runner {
   public:
 
     Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
-	   std::shared_ptr<std::queue<DirVec> > new_runners_list_)
+	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_)
       : id_(id), position_(init_pos), log_(log), grid_(grid), new_runners_list_(new_runners_list_) {
       Logger::log_line_dbg("Created Runner at position ", position_);
       mode_ = Mode::NONE;
       stack_mode_ = false;
       integer_mode_ = false;
     }
+    Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
+	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_, RunnerStack st)
+      : Runner(id, init_pos, grid, log, new_runners_list_) {
+      st_ = st;
+    }
 
     Runner(int id, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
-	   std::shared_ptr<std::queue<DirVec> > new_runners_list_)
+	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_)
       : Runner(id, {}, grid, log, new_runners_list_) {
     }
-
-    ~Runner() {
-      Logger::log_line("Runner ", id_, " died");
-      Logger::log_line("Processed chars: ", processed_chars_);
-      Logger::err_line(err_str_);
-    }
-
 
     // Update the Runner movement
     // Returns true if the Runner is still alive
     bool step();
+    int get_id() { return id_; }
+    void run_debug();
 
   private:
     // Return Ture if character has been processed
     bool process_char(char current_char);
     bool process_integer_buffer();
     bool process_mode_buffer();
+    bool process_split();
 
     template <typename T>
     std::string get_string_from_vars(T val);
@@ -77,7 +83,7 @@ namespace PTrain {
 
     std::shared_ptr<Logger> log_;
     std::shared_ptr<Grid> grid_;
-    std::shared_ptr<std::queue<DirVec> > new_runners_list_;
+    std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_;
 
     RunnerStack st_;
     Mode mode_;

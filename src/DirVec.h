@@ -9,6 +9,8 @@ namespace PTrain {
 		  WEST,
 		  SOUTH
   };
+  Direction get_right(const Direction& dir);
+  Direction get_left(const Direction& dir);
 
   class DirVec {
   public:
@@ -24,10 +26,19 @@ namespace PTrain {
       xx = new_x;
       yy = new_y;
     }
-    void change_dir(Direction new_dir) { direction = new_dir; }
+    void change_dir(const Direction new_dir) { direction = new_dir; }
     Direction get_direction() const { return direction; }
     unsigned int get_x() const { return xx; }
     unsigned int get_y() const { return yy; }
+
+    Direction get_left() const { return PTrain::get_left(direction); }
+    Direction get_right() const { return PTrain::get_right(direction); }
+
+
+    void move(const Direction& dir) {
+      change_dir(dir);
+      update();
+    }
 
     friend std::ostream& operator<<(std::ostream& os, const DirVec& pos);
 

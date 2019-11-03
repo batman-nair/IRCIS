@@ -33,6 +33,7 @@ namespace PTrain {
 #define CH_INT '\''
 
 #define CH_SPLIT '*'
+#define CH_CHECK '?'
 
 #define CH_DOT '.'
 #define CH_SPC ' '

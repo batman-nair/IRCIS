@@ -11,7 +11,7 @@ namespace PTrain {
     std::ostringstream os;
     while (!st_.empty()) {
       os << st_.top().to_string() << ", ";
-      Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
+      Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
       st_.pop();
     }
     Logger::log_line("Stack values: ", os.str());
@@ -97,6 +97,27 @@ namespace PTrain {
 	return false;
       }
       break;
+    case CH_CHECK:
+      {
+	if (st_.top().value) {
+	  break;
+	}
+	// Check if char exists in right or left and go there
+	auto templ = position_;
+	templ.move(position_.get_left());
+	if (grid_->is_inside(templ) && !is_blank(grid_->get(templ))) {
+	  position_.change_dir(position_.get_left());
+	  break;
+	}
+	auto tempr = position_;
+	tempr.move(position_.get_right());
+	if (grid_->is_inside(tempr) && !is_blank(grid_->get(tempr))) {
+	  position_.change_dir(position_.get_right());
+	  break;
+	}
+	set_error("False direction for check not found.");
+	return false;
+      }
     case CH_END:
       set_error("End character reached");
       return false;
@@ -107,7 +128,7 @@ namespace PTrain {
 	return false;
       }
       auto top = st_.top();
-      Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
+      Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
       st_.pop();
       log_->print(top.to_string());
       break;
@@ -131,7 +152,7 @@ namespace PTrain {
 	num = num*10 + (ch-'0');
       }
       Data dat(num, true);
-      Logger::log_line_dbg("Pushing value to stack", get_id(), ": ", dat);
+      Logger::log_line("Pushing value to stack", get_id(), ": ", dat);
       st_.push(dat);
     }
     else {
@@ -141,10 +162,10 @@ namespace PTrain {
 	  return false;
 	}
 	Data num1 = st_.top();
-	Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
+	Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
 	st_.pop();
 	Data num2 = st_.top();
-	Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
+	Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
 	st_.pop();
 	if (num1.is_integer && num2.is_integer) {
 	  switch(start_ch) {
@@ -158,7 +179,6 @@ namespace PTrain {
 	    num1 = num1 * num2;
 	    break;
 	  case CH_DIV:
-	    Logger::log_line_dbg("dividing ", num1, " by ", num2, ": ", num2.value);
 	    if (num2.value == 0) {
 	      set_error("Division by zero error");
 	      return false;
@@ -172,7 +192,7 @@ namespace PTrain {
 	    set_error("Unknown arithmetic op found");
 	    return false;
 	  };
-	  Logger::log_line_dbg("Pushing value to stack", get_id(), ": ", num1);
+	  Logger::log_line("Pushing value to stack", get_id(), ": ", num1);
 	  st_.push(num1);
 	}
       }
@@ -192,7 +212,7 @@ namespace PTrain {
       {
 	for (char ch: mode_buffer_) {
 	  Data data(ch);
-	  Logger::log_line_dbg("Pushing value to stack", get_id(), ": ", data);
+	  Logger::log_line("Pushing value to stack", get_id(), ": ", data);
 	  st_.push(data);
 	}
 	break;
@@ -208,7 +228,7 @@ namespace PTrain {
 	  num = num*10 + (ch-'0');
 	}
 	Data temp = st_[-num];
-	Logger::log_line_dbg("Pushing value to stack", get_id(), ": ", temp);
+	Logger::log_line("Pushing value to stack", get_id(), ": ", temp);
 	st_.push(temp);
 	break;
       }
@@ -227,7 +247,7 @@ namespace PTrain {
 	    Logger::log_line("Stack pop preemptive finish");
 	    break;
 	  }
-	  Logger::log_line_dbg("Stack value popped", get_id(), ": ", st_.top());
+	  Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
 	  st_.pop();
 	}
 	break;

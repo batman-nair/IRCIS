@@ -42,7 +42,7 @@ namespace PTrain {
     Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
 	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_)
       : id_(id), position_(init_pos), log_(log), grid_(grid), new_runners_list_(new_runners_list_) {
-      Logger::log_line_dbg("Created Runner at position ", position_);
+      Logger::log_line("Created Runner at position ", position_);
       mode_ = Mode::NONE;
       stack_mode_ = false;
       integer_mode_ = false;

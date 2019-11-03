@@ -1,6 +1,25 @@
 #include <DirVec.h>
 
 namespace PTrain {
+  Direction get_right(const Direction& dir) {
+    switch(dir) {
+    case NORTH:  return EAST;
+    case EAST:   return SOUTH;
+    case SOUTH:  return WEST;
+    case WEST:   return NORTH;
+    default:     return NORTH;
+    }
+  }
+  Direction get_left(const Direction& dir) {
+    switch(dir) {
+    case NORTH:  return WEST;
+    case EAST:   return NORTH;
+    case SOUTH:  return EAST;
+    case WEST:   return SOUTH;
+    default:     return NORTH;
+    }
+  }
+
   std::ostream& operator<<(std::ostream& os, const Direction& dir) {
     char ch = 'X';
     switch (dir) {

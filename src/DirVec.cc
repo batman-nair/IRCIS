@@ -1,6 +1,6 @@
 #include <DirVec.h>
 
-namespace PTrain {
+namespace Ircis {
   Direction get_right(const Direction& dir) {
     switch(dir) {
     case NORTH:  return EAST;

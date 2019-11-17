@@ -3,7 +3,7 @@
 #include <Logger.h>
 #include <fstream>
 
-namespace PTrain {
+namespace Ircis {
 
   Grid::Grid(std::string file_name) {
     read_file(file_name);

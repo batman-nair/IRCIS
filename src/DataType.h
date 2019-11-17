@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace PTrain {
+namespace Ircis {
   // Structure to store values taken from grid in stack
   struct DataType {
     DataType() : value(0), is_integer(true) { }

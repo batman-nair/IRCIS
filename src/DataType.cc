@@ -2,7 +2,7 @@
 
 #include <ostream>
 
-namespace PTrain {
+namespace Ircis {
   std::string DataType::to_string() const {
     return is_integer? std::to_string(value) : std::string(1, (char)value);
   }

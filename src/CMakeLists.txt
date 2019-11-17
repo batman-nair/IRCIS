@@ -1,6 +1,6 @@
-add_executable(ptrain
+add_executable(ircis
   main.cc
-  PTrain.cc
+  Ircis.cc
   Runner.cc
   Grid.cc
   Logger.cc
@@ -10,11 +10,11 @@ add_executable(ptrain
   CharMaps.cc
   )
 
-target_compile_options(ptrain PRIVATE -Wall -Wextra -Wpedantic -Werror)
+target_compile_options(ircis PRIVATE -Wall -Wextra -Wpedantic -Werror)
 
 include_directories(.)
 
 # Have a copy of the executable in the project root
-add_custom_command(TARGET ptrain POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:ptrain> ${PROJECT_SOURCE_DIR}/
+add_custom_command(TARGET ircis POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:ircis> ${PROJECT_SOURCE_DIR}/
   )

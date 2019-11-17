@@ -22,7 +22,7 @@ void DBG_slave(T val, Types... vars) {
 #define PN(x)
 #endif
 
-namespace PTrain {
+namespace Ircis {
   class Logger {
   public:
     Logger(std::string file_name) : output_file(file_name) { }

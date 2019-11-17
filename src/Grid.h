@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace PTrain {
+namespace Ircis {
   class Grid {
   public:
     Grid(std::string file_name);

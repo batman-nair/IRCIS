@@ -10,7 +10,7 @@
     return false;						\
   }
 
-namespace PTrain {
+namespace Ircis {
   // Character defines
 #define CH_NORTH '^'
 #define CH_SOUTH 'v'

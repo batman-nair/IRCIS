@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace PTrain {
+namespace Ircis {
   enum Direction {
 		  NORTH,
 		  EAST,
@@ -31,8 +31,8 @@ namespace PTrain {
     unsigned int get_x() const { return xx; }
     unsigned int get_y() const { return yy; }
 
-    Direction get_left() const { return PTrain::get_left(direction); }
-    Direction get_right() const { return PTrain::get_right(direction); }
+    Direction get_left() const { return Ircis::get_left(direction); }
+    Direction get_right() const { return Ircis::get_right(direction); }
 
 
     void move(const Direction& dir) {

@@ -4,7 +4,7 @@
 
 #include <vector>
 
-namespace PTrain {
+namespace Ircis {
   // Custom stack implementation with relative indexing
   class RunnerStack {
   public:

@@ -3,7 +3,7 @@
 #include <cctype>
 #include <sstream>
 
-namespace PTrain {
+namespace Ircis {
   void Runner::run_debug() {
     Logger::log_line("Runner ", id_, " died");
     Logger::log_line("Processed chars: ", processed_chars_);
@@ -264,12 +264,8 @@ namespace PTrain {
   bool Runner::process_split() {
     DirVec curr_position = position_;
     DirVec temp = curr_position;
-    Logger::log_line("Got split at ", temp);
     bool create_runner = false;
-    temp.change_dir(Direction::EAST);
-    temp.update();
-    if (grid_->is_inside(temp))
-      Logger::log_line("EAST char: ", grid_->get(temp));
+    temp.move(Direction::EAST);
     if (grid_->is_inside(temp) && grid_->get(temp) == CH_EAST) {
       if (!create_runner) {
 	position_.change_dir(Direction::EAST);
@@ -279,10 +275,7 @@ namespace PTrain {
 	new_runners_list_->push({temp, st_});
     }
     temp = curr_position;
-    temp.change_dir(Direction::NORTH);
-    temp.update();
-    if (grid_->is_inside(temp))
-      Logger::log_line("NORTH char: ", grid_->get(temp));
+    temp.move(Direction::NORTH);
     if (grid_->is_inside(temp) && grid_->get(temp) == CH_NORTH) {
       if (!create_runner) {
 	position_.change_dir(Direction::NORTH);
@@ -292,10 +285,7 @@ namespace PTrain {
 	new_runners_list_->push({temp, st_});
     }
     temp = curr_position;
-    temp.change_dir(Direction::SOUTH);
-    temp.update();
-    if (grid_->is_inside(temp))
-      Logger::log_line("SOUTH char: ", grid_->get(temp));
+    temp.move(Direction::SOUTH);
     if (grid_->is_inside(temp) && grid_->get(temp) == CH_SOUTH) {
       if (!create_runner) {
 	position_.change_dir(Direction::SOUTH);
@@ -305,10 +295,7 @@ namespace PTrain {
 	new_runners_list_->push({temp, st_});
     }
     temp = curr_position;
-    temp.change_dir(Direction::WEST);
-    temp.update();
-    if (grid_->is_inside(temp))
-      Logger::log_line("WEST char: ", grid_->get(temp));
+    temp.move(Direction::WEST);
     if (grid_->is_inside(temp) && grid_->get(temp) == CH_WEST) {
       if (!create_runner) {
 	position_.change_dir(Direction::WEST);
@@ -317,7 +304,6 @@ namespace PTrain {
       else
 	new_runners_list_->push({temp, st_});
     }
-    Logger::log_line("Finished split processing");
     return true;
   }
 

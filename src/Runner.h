@@ -12,7 +12,7 @@
 #include <queue>
 #include <unordered_map>
 
-namespace PTrain {
+namespace Ircis {
   enum Mode {
 	     NONE = 0,
 	     STACK,

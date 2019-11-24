@@ -70,7 +70,7 @@ namespace Ircis {
     }
 
   private:
-    static std::ofstream log_file;
+    static std::ofstream log_file; // Initialized in cc
     template <typename T>
     static void log_vars_slave(T val) {
       log_file << val;

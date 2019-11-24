@@ -5,16 +5,15 @@
 
 namespace Ircis {
   void Runner::run_debug() {
-    Logger::log_line("Runner ", id_, " died");
-    Logger::log_line("Processed chars: ", processed_chars_);
-    Logger::err_line(err_str_);
+    log_line("Runner ", id_, " died");
+    log_line("Processed chars: ", processed_chars_);
+    err_line(err_str_);
     std::ostringstream os;
     while (!st_.empty()) {
       os << st_.top().to_string() << ", ";
-      Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
       st_.pop();
     }
-    Logger::log_line("Stack values: ", os.str());
+    log_line("Stack values: ", os.str());
   }
 
   // Step function processes the current char for Runner and moves it a step
@@ -49,8 +48,6 @@ namespace Ircis {
     }
     // --- Any other char processing ---
     else if (!process_char(current_char)) {
-      // Character could not be processed
-      Logger::err_line("Character could not be processed");
       return false;
     }
 
@@ -122,16 +119,23 @@ namespace Ircis {
       set_error("End character reached");
       return false;
     case CH_PRINT:
-      if (st_.empty()) {
-	log_->print_line();
-	set_error("Stack is empty, forcing exit.");
-	return false;
+      {
+	if (st_.empty()) {
+	  log_->print_line();
+	  set_error("Stack is empty, forcing exit.");
+	  return false;
+	}
+	auto top = st_.top();
+	log_line("Printing and popping: ", st_.top());
+	st_.pop();
+	log_->print(top.to_string());
+	break;
       }
-      auto top = st_.top();
-      Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
-      st_.pop();
-      log_->print(top.to_string());
-      break;
+    default:
+      if (!is_blank(current_char)) {
+	// Character could not be processed
+	err_line("Character could not be processed: ", static_cast<char>(current_char));
+      }
     }
     return true;
   }
@@ -152,7 +156,7 @@ namespace Ircis {
 	num = num*10 + (ch-'0');
       }
       Data dat(num, true);
-      Logger::log_line("Pushing value to stack", get_id(), ": ", dat);
+      log_line("Pushing value to stack ", dat);
       st_.push(dat);
     }
     else {
@@ -162,20 +166,23 @@ namespace Ircis {
 	  return false;
 	}
 	Data num1 = st_.top();
-	Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
+	log_line("Stack value popped ", st_.top());
 	st_.pop();
 	Data num2 = st_.top();
-	Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
+	log_line("Stack value popped ", st_.top());
 	st_.pop();
 	if (num1.is_integer && num2.is_integer) {
 	  switch(start_ch) {
 	  case CH_ADD:
+	    log_line("Arith: ", num1, " + ", num2);
 	    num1 = num1 + num2;
 	    break;
 	  case CH_SUB:
+	    log_line("Arith: ", num1, " - ", num2);
 	    num1 = num1 - num2;
 	    break;
 	  case CH_MUL:
+	    log_line("Arith: ", num1, " * ", num2);
 	    num1 = num1 * num2;
 	    break;
 	  case CH_DIV:
@@ -183,16 +190,18 @@ namespace Ircis {
 	      set_error("Division by zero error");
 	      return false;
 	    }
+	    log_line("Arith: ", num1, " / ", num2);
 	    num1 = num1 / num2;
 	    break;
 	  case CH_MOD:
+	    log_line("Arith: ", num1, " % ", num2);
 	    num1 = num1 % num2;
 	    break;
 	  default:
-	    set_error("Unknown arithmetic op found");
+	    set_error("Unknown arithmetic op found: ", start_ch);
 	    return false;
 	  };
-	  Logger::log_line("Pushing value to stack", get_id(), ": ", num1);
+	  log_line("Pushing value to stack ", num1);
 	  st_.push(num1);
 	}
       }
@@ -212,7 +221,7 @@ namespace Ircis {
       {
 	for (char ch: mode_buffer_) {
 	  Data data(ch);
-	  Logger::log_line("Pushing value to stack", get_id(), ": ", data);
+	  log_line("Pushing value to stack ", data);
 	  st_.push(data);
 	}
 	break;
@@ -228,7 +237,7 @@ namespace Ircis {
 	  num = num*10 + (ch-'0');
 	}
 	Data temp = st_[-num];
-	Logger::log_line("Pushing value to stack", get_id(), ": ", temp);
+	log_line("Pushing value to stack ", temp);
 	st_.push(temp);
 	break;
       }
@@ -244,10 +253,10 @@ namespace Ircis {
 	}
 	for (int ii = 0; ii < num; ++ii) {
 	  if (st_.empty()) {
-	    Logger::log_line("Stack pop preemptive finish");
+	    log_line("Stack pop preemptive finish");
 	    break;
 	  }
-	  Logger::log_line("Stack value popped", get_id(), ": ", st_.top());
+	  log_line("Stack value popped ", st_.top());
 	  st_.pop();
 	}
 	break;

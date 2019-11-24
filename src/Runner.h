@@ -78,6 +78,16 @@ namespace Ircis {
     template <typename... Types>
     void set_error(Types... vars);
 
+    // Wrapper over Logger functions with Runner name prints
+    template <typename ...Types>
+    void log_line(Types... vars) {
+      Logger::log_line("Runner ", get_id(), ": ", vars...);
+    }
+    template <typename ...Types>
+    void err_line(Types... vars) {
+      Logger::err_line("Runner ", get_id(), ": ", vars...);
+    }
+
     int id_ = 0;
     DirVec position_;
 

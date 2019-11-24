@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <unistd.h>
 
 template <typename T>
 void DBG_slave(T val) {
@@ -25,59 +26,70 @@ void DBG_slave(T val, Types... vars) {
 namespace Ircis {
   class Logger {
   public:
-    Logger(std::string file_name) : output_file(file_name) { }
+    Logger(std::string file_name, bool quiet_mode=false)
+      : output_file_(file_name) {
+      set_quiet_mode(quiet_mode);
+    }
 
     template <class T>
     void print(T val) {
-      std::cout << val;
-      output_file << val;
+      if (!quiet_mode_)
+	std::cout << val;
+      output_file_ << val;
     }
     void print_line() {
-      std::cout << std::endl;
-      output_file << std::endl;
+      if (!quiet_mode_)
+	std::cout << std::endl;
+      output_file_ << std::endl;
     }
     template <class T>
     void print_line(T val) {
-      std::cout << val << std::endl;
-      output_file << val << std::endl;
+      if (!quiet_mode_)
+	std::cout << val << std::endl;
+      output_file_ << val << std::endl;
     }
 
   private:
-    std::ofstream output_file;
+    std::ofstream output_file_;
+
+    static bool quiet_mode_;
+    static void set_quiet_mode(bool quiet_mode);
 
   public:
     template <typename... Types>
     static void log_line_dbg(Types... vars) {
       log_line(vars...);
-      DBG("DEBUG: ", vars...);
+      if (!quiet_mode_)
+	DBG("DEBUG: ", vars...);
     }
     template <typename... Types>
     static void err_line_dbg(Types... vars) {
       err_line(vars...);
-      DBG("ERROR: ", vars...);
+      if (!quiet_mode_)
+	DBG("ERROR: ", vars...);
     }
     template <typename... Types>
     static void log_line(Types... vars) {
-      log_file << "DEBUG: ";
+      log_file_ << "DEBUG: ";
       log_vars_slave(vars...);
-      log_file << std::endl;
+      log_file_ << std::endl;
     }
     template <typename... Types>
     static void err_line(Types... vars) {
-      log_file << "ERROR: ";
+      log_file_ << "ERROR: ";
       log_vars_slave(vars...);
-      log_file << std::endl;
+      log_file_ << std::endl;
     }
 
   private:
-    static std::ofstream log_file; // Initialized in cc
+    static std::ofstream log_file_; // Initialized in cc
     template <typename T>
     static void log_vars_slave(T val) {
-      log_file << val;
+      log_file_ << val;
     }
     template <typename T, typename... Types>
     static void log_vars_slave(T val, Types... vars) {
-      log_file << val;
+      log_file_ << val;
       log_vars_slave(vars...);
     }
   };

@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <Ircis.h>
 #include <fstream>
+#include <memory>
+#include <sstream>
 
 namespace Ircis {
   class SystemTests : public ::testing::Test {
@@ -10,15 +12,13 @@ namespace Ircis {
     }
 
     // void TearDown() override {}
-    Ircis hello_world_{"hello_world.txt", "hello_world_test.log", true};
-
+    std::shared_ptr<std::ostringstream> output = std::make_shared<std::ostringstream>();
+    Ircis hello_world_{"hello_world.txt", output, true};
   };
 
   TEST_F(SystemTests, HelloWorld) {
     while (hello_world_.update());
-    std::ifstream t("hello_world_test.log");
-    std::stringstream buffer;
-    buffer << t.rdbuf();
-    ASSERT_EQ("Hello World!\n \n", buffer.str());
+    ASSERT_EQ("Hello World!\n \n", output->str());
+    output->clear();
   }
 }

@@ -1,4 +1,5 @@
 *~
 build/*
 ircis
+ircis_test
 *.log

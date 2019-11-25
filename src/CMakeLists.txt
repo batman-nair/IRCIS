@@ -1,6 +1,6 @@
 set(BINARY ${CMAKE_PROJECT_NAME})
 
-set(SOURCES main.cc
+set(SOURCES
   Ircis.cc
   Runner.cc
   Grid.cc
@@ -10,13 +10,13 @@ set(SOURCES main.cc
   DataType.cc
   CharMaps.cc
   )
-add_executable(${BINARY} ${SOURCES})
-
-target_compile_options(${BINARY} PRIVATE -Wall -Wextra -Wpedantic -Werror)
-
 include_directories(.)
 
 add_library(${BINARY}_lib STATIC ${SOURCES})
+
+add_executable(${BINARY} main.cc)
+target_link_libraries(${BINARY} PRIVATE ${BINARY}_lib)
+target_compile_options(${BINARY} PRIVATE -Wall -Wextra -Wpedantic -Werror)
 
 # Have a copy of the executable in the project root
 add_custom_command(TARGET ${BINARY} POST_BUILD

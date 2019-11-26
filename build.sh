@@ -11,3 +11,4 @@ cmake -E make_directory build/$CONFIG
 cd build/$CONFIG
 cmake -DCMAKE_BUILD_TYPE=${CONFIG} ../../
 cmake --build . --config "${CONFIG}"
+ctest

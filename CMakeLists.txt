@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 project(ircis)
 
+enable_testing()
+
 include_directories(src)
 
 add_subdirectory(src)

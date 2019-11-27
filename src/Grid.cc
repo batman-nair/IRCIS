@@ -2,6 +2,7 @@
 
 #include <Logger.h>
 #include <fstream>
+#include <sstream>
 
 namespace Ircis {
 
@@ -12,6 +13,8 @@ namespace Ircis {
 
   void Grid::read_file(std::string file_name) {
     std::ifstream src_file(file_name);
+    if (!src_file)
+      throw GridFileNotFoundException(file_name);
     Logger::log_line_dbg("Reading file: ", file_name);
     lines_.clear();
     width_ = 0;

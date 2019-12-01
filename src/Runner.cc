@@ -19,6 +19,7 @@ namespace Ircis {
   // Step function processes the current char for Runner and moves it a step
   // Returns false if Runner is dead
   bool Runner::step() {
+    path_.push_back(position_);
     int current_char = grid_->get(position_.get_x(), position_.get_y());
     processed_chars_.push_back(current_char);
 
@@ -281,7 +282,7 @@ namespace Ircis {
 	create_runner = true;
       }
       else
-	new_runners_list_->push({temp, st_});
+	new_runners_list_->push({temp, st_, path_});
     }
     temp = curr_position;
     temp.move(Direction::NORTH);
@@ -291,7 +292,7 @@ namespace Ircis {
 	create_runner = true;
       }
       else
-	new_runners_list_->push({temp, st_});
+	new_runners_list_->push({temp, st_, path_});
     }
     temp = curr_position;
     temp.move(Direction::SOUTH);
@@ -301,7 +302,7 @@ namespace Ircis {
 	create_runner = true;
       }
       else
-	new_runners_list_->push({temp, st_});
+	new_runners_list_->push({temp, st_, path_});
     }
     temp = curr_position;
     temp.move(Direction::WEST);
@@ -311,7 +312,7 @@ namespace Ircis {
 	create_runner = true;
       }
       else
-	new_runners_list_->push({temp, st_});
+	new_runners_list_->push({temp, st_, path_});
     }
     return true;
   }

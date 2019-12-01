@@ -34,28 +34,35 @@ namespace Ircis {
   struct RunnerInfo {
     DirVec position;
     RunnerStack st;
+    std::vector<DirVec> path;
   };
 
   class Runner {
   public:
 
     Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
-	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_)
-      : id_(id), position_(init_pos), log_(log), grid_(grid), new_runners_list_(new_runners_list_) {
+	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list)
+      : id_(id), position_(init_pos), log_(log), grid_(grid), new_runners_list_(new_runners_list) {
       Logger::log_line("Created Runner at position ", position_);
       mode_ = Mode::NONE;
       stack_mode_ = false;
       integer_mode_ = false;
     }
     Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
-	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_, RunnerStack st)
-      : Runner(id, init_pos, grid, log, new_runners_list_) {
+	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list, RunnerStack st)
+      : Runner(id, init_pos, grid, log, new_runners_list) {
       st_ = st;
+    }
+    Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
+	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list, RunnerStack st,
+	   std::vector<DirVec> path)
+      : Runner(id, init_pos, grid, log, new_runners_list, st) {
+      path_ = path;
     }
 
     Runner(int id, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
-	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_)
-      : Runner(id, {}, grid, log, new_runners_list_) {
+	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list)
+      : Runner(id, {}, grid, log, new_runners_list) {
     }
 
     // Update the Runner movement
@@ -63,6 +70,10 @@ namespace Ircis {
     bool step();
     int get_id() { return id_; }
     void run_debug();
+
+    std::vector<DirVec> get_path() {
+      return path_;
+    }
 
   private:
     // Return Ture if character has been processed
@@ -90,6 +101,7 @@ namespace Ircis {
 
     int id_ = 0;
     DirVec position_;
+    std::vector<DirVec> path_;
 
     std::shared_ptr<Logger> log_;
     std::shared_ptr<Grid> grid_;

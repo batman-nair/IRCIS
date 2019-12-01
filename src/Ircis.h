@@ -33,11 +33,16 @@ namespace Ircis {
     // (woah that sounds dark)
     bool update();
 
+    void set_generate_html() { generate_html_ = true; }
+
   private:
     int runner_id_;
     std::shared_ptr<Logger> log_;
     std::shared_ptr<Grid> grid_;
     std::vector<Runner> runner_list_;
+
+    bool generate_html_ = false;
+    std::vector<std::vector<DirVec>> paths_;
 
     std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_;
   };

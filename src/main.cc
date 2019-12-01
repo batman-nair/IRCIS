@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
   std::string file_name = argv[1];
 
   Ircis::Ircis ircis(file_name);
+  ircis.set_generate_html();
   while (ircis.update());
 
   Ircis::Logger::log_line_dbg("Program has finished running");

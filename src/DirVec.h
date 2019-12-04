@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 
 namespace Ircis {
   enum Direction {
@@ -49,4 +50,10 @@ namespace Ircis {
 
   std::ostream& operator<<(std::ostream& os, const Direction& dir);
   std::ostream& operator<<(std::ostream& os, const DirVec& pos);
+
+  struct MovementData {
+    std::vector<DirVec> path;
+    unsigned int alive_from = 0;
+    unsigned int alive_till = 0;
+  };
 }

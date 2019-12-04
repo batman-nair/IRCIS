@@ -84,29 +84,34 @@ namespace Ircis {
     output_file_ << css_content;
 
     size_t runner_no = 0;
-    for (const auto& path: paths_) {
+    for (const auto& data: paths_) {
       output_file_ << ".num" << runner_no << " {\n";
-      output_file_ << "  animation: anim" << runner_no << " " << path.size()/STEPS_PER_SEC << "s forwards;\n";
+      output_file_ << "  animation: anim" << runner_no << " " << data.path.size()/STEPS_PER_SEC << "s forwards;\n";
       output_file_ << "}\n";
 
       output_file_ << "@keyframes anim" << runner_no << " {\n";
-      float percent_inc = 100.0/path.size();
+      float percent_inc = 100.0/data.path.size();
       float current_percent = 0;
-      for (auto& pos: path) {
+      for (size_t ii = 0; ii < data.path.size(); ++ii) {
+	auto& pos = data.path[ii];
+      // for (auto& pos: data.path) {
 	output_file_ << current_percent << "% {\n";
 	output_file_ << "  margin-right: -" << pos.get_x() << "00%;\n";
 	output_file_ << "  margin-left: " << pos.get_x() << "00%;\n";
 	output_file_ << "  margin-top: " << pos.get_y() << "00%;\n";
 	output_file_ << "  margin-bottom: -" << pos.get_y() << "00%;\n";
-	output_file_ << "  opacity: 1;\n";
+	if (ii >= data.alive_from && ii < data.alive_till)
+	  output_file_ << "  opacity: 1;\n";
+	else
+	  output_file_ << "  opacity: 0;\n";
 	output_file_ << "}\n";
 	current_percent += percent_inc;
       }
       output_file_ << "100% {\n";
-      output_file_ << "  margin-right: -" << path.back().get_x() << "00%;\n";
-      output_file_ << "  margin-left: " << path.back().get_x() << "00%;\n";
-      output_file_ << "  margin-top: " << path.back().get_y() << "00%;\n";
-      output_file_ << "  margin-bottom: -" << path.back().get_y() << "00%;\n";
+      output_file_ << "  margin-right: -" << data.path.back().get_x() << "00%;\n";
+      output_file_ << "  margin-left: " << data.path.back().get_x() << "00%;\n";
+      output_file_ << "  margin-top: " << data.path.back().get_y() << "00%;\n";
+      output_file_ << "  margin-bottom: -" << data.path.back().get_y() << "00%;\n";
       output_file_ << "  opacity: 0;\n";
       output_file_ << "}\n";
       output_file_ << "}\n";

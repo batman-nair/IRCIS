@@ -19,6 +19,7 @@ namespace Ircis {
        grid_(std::make_shared<Grid>(input_file)),
        new_runners_list_(std::make_shared<std::queue<RunnerInfo> >()) {
       runner_list_.emplace_back(runner_id_++, grid_, log_, new_runners_list_);
+      paths_.emplace_back();
     }
     Ircis(std::string input_file, std::shared_ptr<std::ostream> output_stream, bool quiet_mode=false)
       :runner_id_(0),
@@ -26,6 +27,7 @@ namespace Ircis {
        grid_(std::make_shared<Grid>(input_file)),
        new_runners_list_(std::make_shared<std::queue<RunnerInfo> >()) {
       runner_list_.emplace_back(runner_id_++, grid_, log_, new_runners_list_);
+      paths_.emplace_back();
     }
 
     // Steps all runner instances
@@ -42,7 +44,7 @@ namespace Ircis {
     std::vector<Runner> runner_list_;
 
     bool generate_html_ = false;
-    std::vector<std::vector<DirVec>> paths_;
+    std::vector<MovementData> paths_;
 
     std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_;
   };

@@ -2,7 +2,8 @@ set(BINARY ${CMAKE_PROJECT_NAME})
 
 set(SOURCES
   Ircis.cc
-  HTMLViz.cc
+  HTMLVizCSS.cc
+  HTMLVizJS.cc
   Runner.cc
   Grid.cc
   Logger.cc

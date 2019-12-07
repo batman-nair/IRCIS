@@ -35,7 +35,10 @@ namespace Ircis {
     // (woah that sounds dark)
     bool update();
 
-    void set_generate_html() { generate_html_ = true; }
+    void set_generate_html(std::string type="CSS") {
+      generate_html_ = true;
+      html_method_ = type;
+    }
 
   private:
     int runner_id_;
@@ -43,6 +46,7 @@ namespace Ircis {
     std::shared_ptr<Grid> grid_;
     std::vector<Runner> runner_list_;
 
+    std::string html_method_ = "CSS";
     bool generate_html_ = false;
     std::vector<MovementData> paths_;
 

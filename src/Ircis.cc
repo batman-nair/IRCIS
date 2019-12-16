@@ -14,10 +14,20 @@ namespace Ircis {
       else {
 	Logger::log_line("Runner ", it->get_id(), " died.");
 	it->run_debug();
-	Logger::log_line("Finalizing MovementData for Runner ", it->get_id(), "ending at step: ", step_number);
-	paths_[it->get_id()].path = it->get_path();
-	paths_[it->get_id()].alive_till = step_number;
+	if (generate_html_) {
+	  Logger::log_line("Finalizing MovementData for Runner ", it->get_id(), "ending at step: ", step_number);
+	  paths_[it->get_id()].path = it->get_path();
+	  paths_[it->get_id()].alive_till = step_number;
+	}
+
 	runner_list_.erase(it--); /* iter-- so the loop proceeds properly */
+      }
+      if (generate_html_) {
+	static std::string prev_output_string;
+	if (output_log_stream_->str() != prev_output_string) {
+	  time_output_data_.push_back({step_number, output_log_stream_->str()});
+	  prev_output_string = output_log_stream_->str();
+	}
       }
     }
 
@@ -25,9 +35,11 @@ namespace Ircis {
       Logger::log_line("Adding new Runner");
       keep_moving = true;
       auto new_runner_info = new_runners_list_->front();
-      paths_.emplace_back();
-      Logger::log_line("Adding new MovementData for Runner ", runner_id_, " starting at step: ", step_number);
-      paths_[runner_id_].alive_from = step_number;
+      if (generate_html_) {
+	paths_.emplace_back();
+	Logger::log_line("Adding new MovementData for Runner ", runner_id_, " starting at step: ", step_number);
+	paths_[runner_id_].alive_from = step_number;
+      }
       runner_list_.emplace_back(runner_id_++, new_runner_info.position, grid_, log_, new_runners_list_, new_runner_info.st, new_runner_info.path);
       Logger::log_line("Added new runner to list, Runner ", runner_id_);
       new_runners_list_->pop();
@@ -41,9 +53,9 @@ namespace Ircis {
 	Logger::log_line("Creating html output with no. of paths: ", paths_.size());
 	auto html_factory = [this] () -> std::unique_ptr<HTMLVizBase> {
 			      if (html_method_.compare("CSS") == 0)
-				return std::make_unique<HTMLVizCSS>("output.html", grid_->get_lines(), paths_);
+				return std::make_unique<HTMLVizCSS>("output.html", grid_->get_lines(), paths_, time_output_data_);
 			      else
-				return std::make_unique<HTMLVizJS>("output.html", grid_->get_lines(), paths_);
+				return std::make_unique<HTMLVizJS>("output.html", grid_->get_lines(), paths_, time_output_data_);
 			    };
 	std::unique_ptr<HTMLVizBase> html_viz = html_factory();
 	html_viz->generate_html();

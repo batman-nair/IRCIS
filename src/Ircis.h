@@ -7,6 +7,8 @@
 #include <string>
 #include <queue>
 #include <memory>
+#include <sstream>
+
 
 namespace Ircis {
   class Ircis {
@@ -36,6 +38,8 @@ namespace Ircis {
     bool update();
 
     void set_generate_html(std::string type="CSS") {
+      output_log_stream_ = std::make_shared<std::ostringstream>();
+      log_->set_output_stream(output_log_stream_);
       generate_html_ = true;
       html_method_ = type;
     }
@@ -49,6 +53,8 @@ namespace Ircis {
     std::string html_method_ = "CSS";
     bool generate_html_ = false;
     std::vector<MovementData> paths_;
+    std::vector<std::pair<unsigned int, std::string>> time_output_data_;
+    std::shared_ptr<std::ostringstream> output_log_stream_;
 
     std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_;
   };

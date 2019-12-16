@@ -27,34 +27,36 @@ namespace Ircis {
   class Logger {
   public:
     Logger(std::string file_name, bool quiet_mode=false)
-      : output_file_(std::make_shared<std::fstream>(file_name)) {
+      : output_stream_(std::make_shared<std::fstream>(file_name)) {
       set_quiet_mode(quiet_mode);
     }
     Logger(std::shared_ptr<std::ostream> log, bool quiet_mode=false)
-      : output_file_(log) {
+      : output_stream_(log) {
       set_quiet_mode(quiet_mode);
     }
+
+    void set_output_stream(std::shared_ptr<std::ostream> stream);
 
     template <class T>
     void print(T val) {
       if (!quiet_mode_)
 	std::cout << val;
-      *output_file_ << val;
+      *output_stream_ << val;
     }
     void print_line() {
       if (!quiet_mode_)
 	std::cout << std::endl;
-      *output_file_ << std::endl;
+      *output_stream_ << std::endl;
     }
     template <class T>
     void print_line(T val) {
       if (!quiet_mode_)
 	std::cout << val << std::endl;
-      *output_file_ << val << std::endl;
+      *output_stream_ << val << std::endl;
     }
 
   private:
-    std::shared_ptr<std::ostream> output_file_;
+    std::shared_ptr<std::ostream> output_stream_;
 
     static bool quiet_mode_;
     static void set_quiet_mode(bool quiet_mode);

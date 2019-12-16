@@ -1,5 +1,7 @@
 #include <HTMLViz.h>
 
+#include <algorithm>
+
 #define STEPS_PER_SEC 6
 
 const char* start_css = R"(<!DOCTYPE html>
@@ -55,6 +57,17 @@ const char* css_content = R"(
   margin-bottom: -0%;
   border-radius: 10%;
 }
+
+.output {
+  content: "-";
+}
+)";
+
+const char* start_output_anim = R"(
+@keyframes output-anim {
+  0% {
+    content: "";
+  }
 )";
 
 const char* start_body = R"(
@@ -68,6 +81,10 @@ const char* start_body = R"(
 )";
 
 const char* end_body = R"(
+</div>
+
+<div>
+<p>OUTPUT: <span class="output"></span></p>
 </div>
 
 </body>
@@ -84,13 +101,16 @@ namespace Ircis {
     output_file_ << css_content;
 
     size_t runner_no = 0;
+    size_t max_path_length = std::max_element(paths_.begin(), paths_.end(),
+					      [](auto& lhs, auto& rhs) {
+						return lhs.path.size() < rhs.path.size();
+					      })->path.size();
+    float percent_inc = 100.0/max_path_length;
     for (const auto& data: paths_) {
       output_file_ << ".num" << runner_no << " {\n";
-      output_file_ << "  animation: anim" << runner_no << " " << data.path.size()/STEPS_PER_SEC << "s forwards;\n";
+      output_file_ << "  animation: anim" << runner_no << " " << max_path_length/STEPS_PER_SEC << "s forwards;\n";
       output_file_ << "}\n";
-
       output_file_ << "@keyframes anim" << runner_no << " {\n";
-      float percent_inc = 100.0/data.path.size();
       float current_percent = 0;
       for (size_t ii = 0; ii < data.path.size(); ++ii) {
 	auto& pos = data.path[ii];
@@ -107,6 +127,13 @@ namespace Ircis {
 	output_file_ << "}\n";
 	current_percent += percent_inc;
       }
+      output_file_ << current_percent << "% {\n";
+      output_file_ << "  margin-right: -" << data.path.back().get_x() << "00%;\n";
+      output_file_ << "  margin-left: " << data.path.back().get_x() << "00%;\n";
+      output_file_ << "  margin-top: " << data.path.back().get_y() << "00%;\n";
+      output_file_ << "  margin-bottom: -" << data.path.back().get_y() << "00%;\n";
+      output_file_ << "  opacity: 0;\n";
+      output_file_ << "}\n";
       output_file_ << "100% {\n";
       output_file_ << "  margin-right: -" << data.path.back().get_x() << "00%;\n";
       output_file_ << "  margin-left: " << data.path.back().get_x() << "00%;\n";
@@ -117,6 +144,26 @@ namespace Ircis {
       output_file_ << "}\n";
       ++runner_no;
     }
+
+    output_file_ << ".output:after {\n";
+    output_file_ << "  animation: output-anim " << max_path_length/STEPS_PER_SEC << "s forwards;\n";
+    output_file_ << "  content: \"--\";\n";
+    output_file_ << "}\n";
+    output_file_ << start_output_anim;
+    std::string prev_output = "";
+    for (auto& data: time_output_data_) {
+      output_file_ << data.first*percent_inc-0.1 << "% {\n";
+      output_file_ << R"(  content: ")" << prev_output << "\";\n";
+      output_file_ << "}\n";
+      output_file_ << data.first*percent_inc << "% {\n";
+      output_file_ << R"(  content: ")" << data.second << "\";\n";
+      output_file_ << "}\n";
+      prev_output = data.second;
+    }
+    output_file_ << "100% {\n";
+    output_file_ << R"(  content: ")" << prev_output << "\";\n";
+    output_file_ << "}\n";
+    output_file_ << "}\n";
 
     output_file_ << start_body;
     for (size_t xx = 0; xx < num_rows; ++xx) {

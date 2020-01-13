@@ -41,6 +41,8 @@ const char* css_content = R"(
     color: black;
     background: none;
     border: none;
+    resize: none;
+    user-select: none;
 }
 
 .sp {
@@ -154,9 +156,15 @@ namespace Ircis {
     for (auto& data: time_output_data_) {
       output_file_ << data.first*percent_inc-0.1 << "% {\n";
       output_file_ << R"(  content: ")" << prev_output << "\";\n";
+      output_file_ << R"(  background: white;\n)";
       output_file_ << "}\n";
       output_file_ << data.first*percent_inc << "% {\n";
       output_file_ << R"(  content: ")" << data.second << "\";\n";
+      output_file_ << R"(  background: black;\n)";
+      output_file_ << "}\n";
+      output_file_ << data.first*percent_inc+0.1 << "% {\n";
+      output_file_ << R"(  content: ")" << data.second << "\";\n";
+      output_file_ << R"(  background: white;\n)";
       output_file_ << "}\n";
       prev_output = data.second;
     }
@@ -168,7 +176,7 @@ namespace Ircis {
     output_file_ << start_body;
     for (size_t xx = 0; xx < num_rows; ++xx) {
       for (size_t yy = 0; yy < num_cols; ++yy) {
-	output_file_ << R"(<div class="grid-item" style="grid-row:)" << xx+1 << R"(; grid-column:)" << yy+1 << R"("><textarea class="text">)" << lines_[xx][yy] << "</textarea></div>\n";
+	output_file_ << R"(<div class="grid-item" style="grid-row:)" << xx+1 << R"(; grid-column:)" << yy+1 << R"("><textarea class="text" readonly>)" << lines_[xx][yy] << "</textarea></div>\n";
       }
     }
 

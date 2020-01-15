@@ -40,7 +40,7 @@ namespace Ircis {
 	Logger::log_line("Adding new MovementData for Runner ", runner_id_, " starting at step: ", step_number);
 	paths_[runner_id_].alive_from = step_number;
       }
-      runner_list_.emplace_back(runner_id_++, new_runner_info.position, grid_, log_, new_runners_list_, new_runner_info.st, new_runner_info.path);
+      runner_list_.emplace_back(runner_id_++, new_runner_info.position, grid_, log_, new_runners_list_, new_runner_info.st, new_runner_info.var_map, new_runner_info.path);
       Logger::log_line("Added new runner to list, Runner ", runner_id_);
       new_runners_list_->pop();
     }

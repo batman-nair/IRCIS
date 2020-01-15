@@ -31,13 +31,14 @@ namespace Ircis {
 
   bool is_mode_end_char(Mode mode, char current_char);
 
+  typedef std::unordered_map<std::string, DataType> variable_map_t;
+
   struct RunnerInfo {
     DirVec position;
     RunnerStack st;
+    variable_map_t var_map;
     std::vector<DirVec> path;
   };
-
-  typedef std::unordered_map<std::string, DataType> variable_map_t;
 
   class Runner {
   public:
@@ -51,14 +52,11 @@ namespace Ircis {
       integer_mode_ = false;
     }
     Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
-	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list, RunnerStack st)
+	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list, RunnerStack st,
+	   variable_map_t var_map, std::vector<DirVec> path)
       : Runner(id, init_pos, grid, log, new_runners_list) {
       st_ = st;
-    }
-    Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
-	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list, RunnerStack st,
-	   std::vector<DirVec> path)
-      : Runner(id, init_pos, grid, log, new_runners_list, st) {
+      var_map_ = var_map;
       path_ = path;
     }
 

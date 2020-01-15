@@ -285,7 +285,7 @@ namespace Ircis {
 	    create_runner = true;
 	  }
 	  else {
-	    new_runners_list_->push({temp, st_, path_});
+	    new_runners_list_->push({temp, st_, var_map_, path_});
 	  }
 	}
       };

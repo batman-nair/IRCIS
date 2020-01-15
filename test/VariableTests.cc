@@ -15,6 +15,8 @@ namespace Ircis {
 
     std::shared_ptr<std::stringstream> output_ = std::make_shared<std::stringstream>();
     Ircis local_var_{"local_var_test.txt", output_, true};
+    Ircis local_var_split_{"local_var_split_test.txt", output_, true};
+    Ircis local_var_multi_{"local_var_multi.txt", output_, true};
   };
 
   TEST_F(VariableTests, LocalVarTest) {
@@ -22,6 +24,21 @@ namespace Ircis {
     ASSERT_EQ("4", getline(*output_));
     output_->clear();
   }
+
+  TEST_F(VariableTests, LocalVarSplitTest) {
+    while (local_var_split_.update());
+    ASSERT_EQ("44", getline(*output_));
+    ASSERT_EQ("44", getline(*output_));
+    output_->clear();
+  }
+
+  TEST_F(VariableTests, LocalVarMultiTest) {
+    while (local_var_multi_.update());
+    ASSERT_EQ("22", getline(*output_));
+    ASSERT_EQ("24", getline(*output_));
+    output_->clear();
+  }
+
 
   std::string getline(std::stringstream& os) {
     std::string line;

@@ -2,6 +2,7 @@
 
 #include <cctype>
 #include <sstream>
+#include <algorithm>
 
 namespace Ircis {
   void Runner::run_debug() {
@@ -229,36 +230,25 @@ namespace Ircis {
       }
     case STACK_PUSH:
       {
-	int num = 0;
-	for (char ch: mode_buffer_) {
-	  if (!isdigit(ch)) {
-	    set_error("Invalid character in Stack Pop mode!");
+	if (islower(mode_buffer_[0])) {
+	  if (!process_local_var_fetch())
 	    return false;
-	  }
-	  num = num*10 + (ch-'0');
 	}
-	Data temp = st_[-num];
-	log_line("Pushing value to stack ", temp);
-	st_.push(temp);
+	else {
+	  if (!process_stack_push())
+	    return false;
+	}
 	break;
       }
     case STACK_POP:
       {
-	int num = 0;
-	for (char ch: mode_buffer_) {
-	  if (!isdigit(ch)) {
-	    set_error("Invalid character in Stack Pop mode!");
+	if (islower(mode_buffer_[0])) {
+	  if (!process_local_var_insert())
 	    return false;
-	  }
-	  num = num*10 + (ch-'0');
 	}
-	for (int ii = 0; ii < num; ++ii) {
-	  if (st_.empty()) {
-	    log_line("Stack pop preemptive finish");
-	    break;
-	  }
-	  log_line("Stack value popped ", st_.top());
-	  st_.pop();
+	else {
+	  if (!process_stack_pop())
+	    return false;
 	}
 	break;
       }
@@ -301,9 +291,70 @@ namespace Ircis {
       };
 
     for (Direction dir: {Direction::NORTH, Direction::EAST, Direction::SOUTH, Direction::WEST}) {
-      // log_->log_line("Processing split for Direction: ", dir);
+      // log_line("Processing split for Direction: ", dir);
       process_split_for_direction(dir);
     }
+    return true;
+  }
+
+  bool Runner::process_stack_push() {
+    int num = 0;
+    for (char ch: mode_buffer_) {
+      if (!isdigit(ch)) {
+	set_error("Invalid character in Stack Pop mode!");
+	return false;
+      }
+      num = num*10 + (ch-'0');
+    }
+    Data temp = st_[-num];
+    log_line("Pushing value to stack ", temp);
+    st_.push(temp);
+    return true;
+  }
+
+  bool Runner::process_stack_pop() {
+    int num = 0;
+    for (char ch: mode_buffer_) {
+      if (!isdigit(ch)) {
+	set_error("Invalid character in Stack Pop mode!");
+	return false;
+      }
+      num = num*10 + (ch-'0');
+    }
+    for (int ii = 0; ii < num; ++ii) {
+      if (st_.empty()) {
+	log_line("Stack pop preemptive finish");
+	return true;
+      }
+      log_line("Stack value popped ", st_.top());
+      st_.pop();
+    }
+    return true;
+  }
+
+  bool Runner::process_local_var_fetch() {
+    std::string var(mode_buffer_);
+    if (std::find_if_not(var.begin(), var.end(), isalpha) != var.end()) { // Variable names only alphabets
+      set_error("Variable name '", var, "' should contain only alphabets");
+      return false;
+    }
+    if (var_map_.find(var) == var_map_.end()) {
+      set_error("Couldn't find local variable ", var);
+      return false;
+    }
+    Data temp = var_map_[var];
+    log_line("Pushing variable value to stack ", temp);
+    st_.push(temp);
+    return true;
+  }
+
+  bool Runner::process_local_var_insert() {
+    std::string var(mode_buffer_);
+    if (std::find_if_not(var.begin(), var.end(), isalpha) != var.end()) { // Variable names only alphabets
+      set_error("Variable name '", var, "' should contain only alphabets");
+      return false;
+    }
+    var_map_[var] = st_.top();
     return true;
   }
 

@@ -37,6 +37,8 @@ namespace Ircis {
     std::vector<DirVec> path;
   };
 
+  typedef std::unordered_map<std::string, DataType> variable_map_t;
+
   class Runner {
   public:
 
@@ -69,11 +71,6 @@ namespace Ircis {
     // Returns true if the Runner is still alive
     bool step();
     int get_id() { return id_; }
-    void run_debug();
-
-    std::vector<DirVec> get_path() {
-      return path_;
-    }
 
   private:
     // Return Ture if character has been processed
@@ -81,7 +78,31 @@ namespace Ircis {
     bool process_integer_buffer();
     bool process_mode_buffer();
     bool process_split();
+    bool process_stack_pop();
+    bool process_stack_push();
+    bool process_local_var_fetch();
+    bool process_local_var_insert();
 
+    int id_ = 0;
+    DirVec position_;
+    RunnerStack st_;
+    variable_map_t var_map_;
+
+    Mode mode_;
+    bool stack_mode_;
+    bool integer_mode_;
+    std::string mode_buffer_;	// Holds string taken in a mode for processing
+    std::string integer_mode_buffer_;
+
+    std::shared_ptr<Logger> log_;
+    std::shared_ptr<Grid> grid_;
+    std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_;
+
+    // -- Debug Stuff --
+  public:
+    void run_debug();		// Logs Runner run info
+
+  private:
     template <typename T>
     std::string get_string_from_vars(T val);
     template <typename T, typename... Types>
@@ -99,22 +120,15 @@ namespace Ircis {
       Logger::err_line("Runner ", get_id(), ": ", vars...);
     }
 
-    int id_ = 0;
-    DirVec position_;
-    std::vector<DirVec> path_;
-
-    std::shared_ptr<Logger> log_;
-    std::shared_ptr<Grid> grid_;
-    std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_;
-
-    RunnerStack st_;
-    Mode mode_;
-    bool integer_mode_;
-    std::string mode_buffer_;
-    std::string integer_mode_buffer_;
-
-    bool stack_mode_;
     std::string err_str_;
     std::string processed_chars_;
+
+    // -- For HTML generation --
+  public:
+    std::vector<DirVec> get_path() {
+      return path_;
+    }
+  private:
+    std::vector<DirVec> path_;
   };
 }

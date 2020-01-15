@@ -15,6 +15,7 @@ set(SOURCES
 include_directories(.)
 
 add_library(${BINARY}_lib STATIC ${SOURCES})
+target_compile_features(${BINARY}_lib PUBLIC cxx_std_14)
 
 add_executable(${BINARY} main.cc)
 target_link_libraries(${BINARY} PRIVATE ${BINARY}_lib)

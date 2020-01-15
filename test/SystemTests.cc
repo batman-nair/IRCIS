@@ -47,10 +47,4 @@ namespace Ircis {
     ASSERT_EQ("0111 ", getline(*output_));
     output_->clear();
   }
-
-  std::string getline(std::stringstream& os) {
-    std::string line;
-    std::getline(os, line);
-    return line;
-  }
 }

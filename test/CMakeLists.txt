@@ -3,6 +3,7 @@ set(BINARY ${CMAKE_PROJECT_NAME}_test)
 set(SOURCES
   DataTypeTest.cc
   GridTest.cc
+  VariableTests.cc
   SystemTests.cc
   )
 

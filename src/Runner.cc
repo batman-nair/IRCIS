@@ -271,48 +271,38 @@ namespace Ircis {
     return true;
   }
 
+  constexpr char get_direction_char(Direction dir) {
+    switch(dir) {
+    case Direction::NORTH: return CH_NORTH;
+    case Direction::EAST: return CH_EAST;
+    case Direction::WEST: return CH_WEST;
+    case Direction::SOUTH: return CH_SOUTH;
+    }
+    Logger::err_line("Got invalid Direction!");
+    return CH_NORTH;
+  }
+
   bool Runner::process_split() {
     DirVec curr_position = position_;
-    DirVec temp = curr_position;
     bool create_runner = false;
-    temp.move(Direction::EAST);
-    if (grid_->is_inside(temp) && grid_->get(temp) == CH_EAST) {
-      if (!create_runner) {
-	position_.change_dir(Direction::EAST);
-	create_runner = true;
-      }
-      else
-	new_runners_list_->push({temp, st_, path_});
-    }
-    temp = curr_position;
-    temp.move(Direction::NORTH);
-    if (grid_->is_inside(temp) && grid_->get(temp) == CH_NORTH) {
-      if (!create_runner) {
-	position_.change_dir(Direction::NORTH);
-	create_runner = true;
-      }
-      else
-	new_runners_list_->push({temp, st_, path_});
-    }
-    temp = curr_position;
-    temp.move(Direction::SOUTH);
-    if (grid_->is_inside(temp) && grid_->get(temp) == CH_SOUTH) {
-      if (!create_runner) {
-	position_.change_dir(Direction::SOUTH);
-	create_runner = true;
-      }
-      else
-	new_runners_list_->push({temp, st_, path_});
-    }
-    temp = curr_position;
-    temp.move(Direction::WEST);
-    if (grid_->is_inside(temp) && grid_->get(temp) == CH_WEST) {
-      if (!create_runner) {
-	position_.change_dir(Direction::WEST);
-	create_runner = true;
-      }
-      else
-	new_runners_list_->push({temp, st_, path_});
+    auto process_split_for_direction =
+      [this, &create_runner, &curr_position] (Direction dir) {
+	DirVec temp = curr_position;
+	temp.move(dir);
+	if (grid_->is_inside(temp) && grid_->get(temp) == get_direction_char(dir)) {
+	  if (!create_runner) {
+	    position_.change_dir(dir);
+	    create_runner = true;
+	  }
+	  else {
+	    new_runners_list_->push({temp, st_, path_});
+	  }
+	}
+      };
+
+    for (Direction dir: {Direction::NORTH, Direction::EAST, Direction::SOUTH, Direction::WEST}) {
+      // log_->log_line("Processing split for Direction: ", dir);
+      process_split_for_direction(dir);
     }
     return true;
   }

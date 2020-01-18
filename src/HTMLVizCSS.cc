@@ -2,7 +2,9 @@
 
 #include <algorithm>
 
-#define STEPS_PER_SEC 6
+#define STEPS_PER_SEC 15
+
+std::string sanitize_string(const std::string& str);
 
 const char* start_css = R"(<!DOCTYPE html>
 <html>
@@ -62,6 +64,7 @@ const char* css_content = R"(
 
 .output {
   content: "-";
+  white-space: pre;
 }
 )";
 
@@ -154,19 +157,20 @@ namespace Ircis {
     output_file_ << start_output_anim;
     std::string prev_output = "";
     for (auto& data: time_output_data_) {
+      std::string sanitized_content = sanitize_string(data.second);
       output_file_ << data.first*percent_inc-0.1 << "% {\n";
       output_file_ << R"(  content: ")" << prev_output << "\";\n";
       output_file_ << R"(  background: white;\n)";
       output_file_ << "}\n";
       output_file_ << data.first*percent_inc << "% {\n";
-      output_file_ << R"(  content: ")" << data.second << "\";\n";
+      output_file_ << R"(  content: ")" << sanitized_content << "\";\n";
       output_file_ << R"(  background: black;\n)";
       output_file_ << "}\n";
       output_file_ << data.first*percent_inc+0.1 << "% {\n";
-      output_file_ << R"(  content: ")" << data.second << "\";\n";
+      output_file_ << R"(  content: ")" << sanitized_content << "\";\n";
       output_file_ << R"(  background: white;\n)";
       output_file_ << "}\n";
-      prev_output = data.second;
+      prev_output = sanitized_content;
     }
     output_file_ << "100% {\n";
     output_file_ << R"(  content: ")" << prev_output << "\";\n";
@@ -186,4 +190,15 @@ namespace Ircis {
 
     output_file_ << end_body;
   }
+}
+
+std::string sanitize_string(const std::string& str) {
+  std::string clean_str(str);
+  while(true) {
+    auto it = clean_str.find("\n");
+    if (it == std::string::npos)
+      break;
+    clean_str.replace(it, 1, "\\A ");
+  }
+  return clean_str;
 }

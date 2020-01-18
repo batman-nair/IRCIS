@@ -174,6 +174,7 @@ namespace Ircis {
     }
     output_file_ << "100% {\n";
     output_file_ << R"(  content: ")" << prev_output << "\";\n";
+    output_file_ << R"(  background: white;\n)";
     output_file_ << "}\n";
     output_file_ << "}\n";
 

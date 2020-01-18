@@ -99,8 +99,10 @@ namespace Ircis {
     case CH_CHECK:
       {
 	if (st_.top().value) {
+	  log_line("Condition check true");
 	  break;
 	}
+	log_line("Condition check false");
 	// Check if char exists in right or left and go there
 	auto templ = position_;
 	templ.move(position_.get_left());
@@ -362,6 +364,7 @@ namespace Ircis {
       set_error("Variable name '", var, "' should contain only alphabets");
       return false;
     }
+    log_line("Saving value ", st_.top(), " to variable ", var);
     (*global_var_map_)[var] = st_.top();
     return true;
   }
@@ -388,6 +391,7 @@ namespace Ircis {
       set_error("Variable name '", var, "' should contain only alphabets");
       return false;
     }
+    log_line("Saving value ", st_.top(), " to variable ", var);
     var_map_[var] = st_.top();
     return true;
   }

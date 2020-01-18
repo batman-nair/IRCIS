@@ -17,6 +17,7 @@ namespace Ircis {
     Ircis local_var_{"local_var_test.txt", output_, true};
     Ircis local_var_split_{"local_var_split_test.txt", output_, true};
     Ircis local_var_multi_{"local_var_multi.txt", output_, true};
+    Ircis global_var_{"global_var_test.txt", output_, true};
   };
 
   TEST_F(VariableTests, LocalVarTest) {
@@ -39,6 +40,12 @@ namespace Ircis {
     output_->clear();
   }
 
+  TEST_F(VariableTests, GlobalVarTest) {
+    while (global_var_.update());
+    ASSERT_EQ("7", getline(*output_));
+    ASSERT_EQ("7", getline(*output_));
+    output_->clear();
+  }
 
   std::string getline(std::stringstream& os) {
     std::string line;

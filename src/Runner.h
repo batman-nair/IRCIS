@@ -44,25 +44,29 @@ namespace Ircis {
   public:
 
     Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
+	   std::shared_ptr<variable_map_t> global_var_map,
 	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list)
-      : id_(id), position_(init_pos), log_(log), grid_(grid), new_runners_list_(new_runners_list) {
+      : id_(id), position_(init_pos), grid_(grid), log_(log),
+	global_var_map_(global_var_map), new_runners_list_(new_runners_list) {
       Logger::log_line("Created Runner at position ", position_);
       mode_ = Mode::NONE;
       stack_mode_ = false;
       integer_mode_ = false;
     }
     Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
+	   std::shared_ptr<variable_map_t> global_var_map,
 	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list, RunnerStack st,
 	   variable_map_t var_map, std::vector<DirVec> path)
-      : Runner(id, init_pos, grid, log, new_runners_list) {
+      : Runner(id, init_pos, grid, log, global_var_map, new_runners_list) {
       st_ = st;
       var_map_ = var_map;
       path_ = path;
     }
 
     Runner(int id, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
+	   std::shared_ptr<variable_map_t> global_var_map,
 	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list)
-      : Runner(id, {}, grid, log, new_runners_list) {
+      : Runner(id, {}, grid, log, global_var_map, new_runners_list) {
     }
 
     // Update the Runner movement
@@ -78,6 +82,8 @@ namespace Ircis {
     bool process_split();
     bool process_stack_pop();
     bool process_stack_push();
+    bool process_global_var_fetch();
+    bool process_global_var_insert();
     bool process_local_var_fetch();
     bool process_local_var_insert();
 
@@ -92,8 +98,9 @@ namespace Ircis {
     std::string mode_buffer_;	// Holds string taken in a mode for processing
     std::string integer_mode_buffer_;
 
-    std::shared_ptr<Logger> log_;
     std::shared_ptr<Grid> grid_;
+    std::shared_ptr<Logger> log_;
+    std::shared_ptr<variable_map_t> global_var_map_;
     std::shared_ptr<std::queue<RunnerInfo> > new_runners_list_;
 
     // -- Debug Stuff --

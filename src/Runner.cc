@@ -234,6 +234,10 @@ namespace Ircis {
 	  if (!process_local_var_fetch())
 	    return false;
 	}
+	else if (isupper(mode_buffer_[0])) {
+	  if (!process_global_var_fetch())
+	    return false;
+	}
 	else {
 	  if (!process_stack_push())
 	    return false;
@@ -244,6 +248,10 @@ namespace Ircis {
       {
 	if (islower(mode_buffer_[0])) {
 	  if (!process_local_var_insert())
+	    return false;
+	}
+	else if (isupper(mode_buffer_[0])) {
+	  if (!process_global_var_insert())
 	    return false;
 	}
 	else {
@@ -332,6 +340,32 @@ namespace Ircis {
     return true;
   }
 
+  bool Runner::process_global_var_fetch() {
+    std::string var(mode_buffer_);
+    if (std::find_if_not(var.begin(), var.end(), isalpha) != var.end()) { // Variable names only alphabets
+      set_error("Variable name '", var, "' should contain only alphabets");
+      return false;
+    }
+    if (global_var_map_->find(var) == global_var_map_->end()) {
+      set_error("Couldn't find global variable ", var);
+      return false;
+    }
+    Data temp = (*global_var_map_)[var];
+    log_line("Pushing variable(", var, ") value to stack ", temp);
+    st_.push(temp);
+    return true;
+  }
+
+  bool Runner::process_global_var_insert() {
+    std::string var(mode_buffer_);
+    if (std::find_if_not(var.begin(), var.end(), isalpha) != var.end()) { // Variable names only alphabets
+      set_error("Variable name '", var, "' should contain only alphabets");
+      return false;
+    }
+    (*global_var_map_)[var] = st_.top();
+    return true;
+  }
+
   bool Runner::process_local_var_fetch() {
     std::string var(mode_buffer_);
     if (std::find_if_not(var.begin(), var.end(), isalpha) != var.end()) { // Variable names only alphabets
@@ -343,7 +377,7 @@ namespace Ircis {
       return false;
     }
     Data temp = var_map_[var];
-    log_line("Pushing variable value to stack ", temp);
+    log_line("Pushing variable(", var, ") value to stack ", temp);
     st_.push(temp);
     return true;
   }

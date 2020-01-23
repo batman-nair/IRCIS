@@ -311,7 +311,7 @@ namespace Ircis {
     int num = 0;
     for (char ch: mode_buffer_) {
       if (!isdigit(ch)) {
-	set_error("Invalid character in Stack Pop mode!");
+	set_error("Invalid character in Stack Push mode!");
 	return false;
       }
       num = num*10 + (ch-'0');

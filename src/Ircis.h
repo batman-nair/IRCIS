@@ -20,6 +20,7 @@ namespace Ircis {
        log_(std::make_shared<Logger>(output_file, quiet_mode)),
        grid_(std::make_shared<Grid>(input_file)),
        global_var_map_(std::make_shared<variable_map_t>()),
+       input_file_name_(input_file),
        new_runners_list_(std::make_shared<std::queue<RunnerInfo> >()) {
       runner_list_.emplace_back(runner_id_++, grid_, log_, global_var_map_, new_runners_list_);
       paths_.emplace_back();
@@ -29,6 +30,7 @@ namespace Ircis {
        log_(std::make_shared<Logger>(output_stream, quiet_mode)),
        grid_(std::make_shared<Grid>(input_file)),
        global_var_map_(std::make_shared<variable_map_t>()),
+       input_file_name_(input_file),
        new_runners_list_(std::make_shared<std::queue<RunnerInfo> >()) {
       runner_list_.emplace_back(runner_id_++, grid_, log_, global_var_map_, new_runners_list_);
       paths_.emplace_back();
@@ -53,6 +55,7 @@ namespace Ircis {
     std::shared_ptr<variable_map_t> global_var_map_;
     std::vector<Runner> runner_list_;
 
+    std::string input_file_name_ = "";
     std::string html_method_ = "CSS";
     bool generate_html_ = false;
     std::vector<MovementData> paths_;

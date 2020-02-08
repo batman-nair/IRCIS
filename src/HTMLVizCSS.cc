@@ -10,14 +10,21 @@ const char* start_css = R"(<!DOCTYPE html>
 <html>
 <head>
 <style>
+body {
+    font-family: "Courier New", Courier, monospace;
+    background: #f5eded;
+}
+.program-name {
+    text-align: center;
+}
 .grid-container {
+  background-color: #3e3636;
   display: grid;
 )";
 
 const char* css_content = R"(
-  background-color: #2196F3;
   grid-auto-rows: 1fr;
-  padding: 10px;
+  padding: 8px;
 }
 
 .invis-boi {
@@ -48,7 +55,7 @@ const char* css_content = R"(
 }
 
 .sp {
-  background-color: green;
+  background-color: #d72323;
   grid-column: 1;
   grid-row: 1;
   font-size: 8px;
@@ -61,7 +68,9 @@ const char* css_content = R"(
   margin-bottom: -0%;
   border-radius: 10%;
 }
-
+.output-container {
+    text-align: center;
+}
 .output {
   content: "-";
   white-space: pre;
@@ -75,22 +84,26 @@ const char* start_output_anim = R"(
   }
 )";
 
-const char* start_body = R"(
+const char* start_body_title = R"(
 }
 
 </style>
 </head>
 <body>
+  <h3 class="program-name">
+)";
 
-<div class="grid-container">
+const char* end_title = R"(</h1>
+  <div class="grid-container">
 )";
 
 const char* end_body = R"(
-</div>
+  </div>
 
-<div>
-<p>OUTPUT: <span class="output"></span></p>
-</div>
+  <div class="output-container">
+    <p>OUTPUT: </p>
+    <p><span class="output"></span></p>
+  </div>
 
 </body>
 </html>
@@ -160,7 +173,7 @@ namespace Ircis {
       std::string sanitized_content = sanitize_string(data.second);
       output_file_ << data.first*percent_inc-0.1 << "% {\n";
       output_file_ << R"(  content: ")" << prev_output << "\";\n";
-      output_file_ << R"(  background: white;\n)";
+      output_file_ << R"(  background: none;\n)";
       output_file_ << "}\n";
       output_file_ << data.first*percent_inc << "% {\n";
       output_file_ << R"(  content: ")" << sanitized_content << "\";\n";
@@ -168,17 +181,19 @@ namespace Ircis {
       output_file_ << "}\n";
       output_file_ << data.first*percent_inc+0.1 << "% {\n";
       output_file_ << R"(  content: ")" << sanitized_content << "\";\n";
-      output_file_ << R"(  background: white;\n)";
+      output_file_ << R"(  background: none;\n)";
       output_file_ << "}\n";
       prev_output = sanitized_content;
     }
     output_file_ << "100% {\n";
     output_file_ << R"(  content: ")" << prev_output << "\";\n";
-    output_file_ << R"(  background: white;\n)";
+    output_file_ << R"(  background: none;\n)";
     output_file_ << "}\n";
     output_file_ << "}\n";
 
-    output_file_ << start_body;
+    output_file_ << start_body_title;
+    output_file_ << input_file_name_;
+    output_file_ << end_title;
     for (size_t xx = 0; xx < num_rows; ++xx) {
       for (size_t yy = 0; yy < num_cols; ++yy) {
 	output_file_ << R"(<div class="grid-item" style="grid-row:)" << xx+1 << R"(; grid-column:)" << yy+1 << R"("><textarea class="text" readonly>)" << lines_[xx][yy] << "</textarea></div>\n";

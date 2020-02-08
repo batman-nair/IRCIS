@@ -53,9 +53,9 @@ namespace Ircis {
 	Logger::log_line("Creating html output with no. of paths: ", paths_.size());
 	auto html_factory = [this] () -> std::unique_ptr<HTMLVizBase> {
 			      if (html_method_.compare("CSS") == 0)
-				return std::make_unique<HTMLVizCSS>("output.html", grid_->get_lines(), paths_, time_output_data_);
+				return std::make_unique<HTMLVizCSS>("output.html", grid_->get_lines(), paths_, time_output_data_, input_file_name_);
 			      else
-				return std::make_unique<HTMLVizJS>("output.html", grid_->get_lines(), paths_, time_output_data_);
+				return std::make_unique<HTMLVizJS>("output.html", grid_->get_lines(), paths_, time_output_data_, input_file_name_);
 			    };
 	std::unique_ptr<HTMLVizBase> html_viz = html_factory();
 	html_viz->generate_html();

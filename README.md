@@ -1,12 +1,16 @@
 # IRCIS (I Run Chars I See)
 
-A 2D grid based programming language with a visualizer. Inspired by [Befunge](https://en.wikipedia.org/wiki/Befunge).
+IRCIS is an esoteric programming language where the program exists in a two-dimensional grid of cells, where each cell contains a single instruction, and execution can proceed in any cardinal direction across this grid -- not just left-to-right, but also right-to-left, top-to-bottom, and bottom-to-top.
+
+It has a vizualizer which creates an animated representation of the program execution in HTML and CSS.
+
+Inspired by [Befunge](https://en.wikipedia.org/wiki/Befunge).
 
 <p align="center">
 	<img src="./screencaps/hello_world_banner.gif" alt="Hello World Vizualization">
 </p>
 
-The program works by reading the source file character by character and commands are executed based on the character read.
+The program executes by reading the source file character by character and commands are executed based on the character read.
 This reading is done by a *Runner* object which starts from the top-left of the file and moves to the right.
 Based on the character read, the *Runner* object can change the direction of parsing, create more *Runners*, store/print/calculate values and more.
 Check out the command list to see all the commands implemented.
@@ -46,7 +50,11 @@ The Visualizer helps in understanding the movement of these different *Runner* o
 - Movement of the Runner can be controlled using the characters '>', '^', 'v' and '>'.
 - A Runner dies if it reaches the end of Grid, sees an End Processing(!) character or in the event of an error.
 
-Here you can see the basic movement in the program
+### Printing
+- Hash(#) is used to write values to output. It pops and prints the stack top value to output.
+- Dollar(\$) character starts a newline in the output.
+
+Here you can see the basic movement and printing in the program
 <p align="center">
 	<img src="./screencaps/hello_world.gif" alt="Basic movement gif">
 	<a href="https://batman-nair.github.io/IRCIS/samples/hello_world.html" target="_blank"> HTML LINK </a>
@@ -69,10 +77,6 @@ Here you can see different arithmetic operations performed on numbers
 	<img src="./screencaps/calc.gif" alt="Basic arithmetic example">
 	<a href="https://batman-nair.github.io/IRCIS/samples/calc.html" target="_blank"> HTML LINK </a>
 </p>
-
-### Printing
-- Hash(#) is used to write values to output. It pops and prints the stack top value to output.
-- Dollar(\$) character starts a newline in the output.
 
 ### Conditional
 - Question mark(?) is used for conditional operation. It checks if the stack top value is non-zero.
@@ -110,3 +114,14 @@ Local limit variable is used to store the loop end value, Global Flag is used to
 	<img src="./screencaps/fizzbuzz.gif" alt="Vairable used to keep limit">
 	<a href="https://batman-nair.github.io/IRCIS/samples/fizzbuzz.html" target="_blank"> HTML LINK </a>
 </p>
+
+## How to compile and run
+
+Just run `./build.sh` to compile the program with the tests and creates the final executable with a single command.
+
+You can run the program with
+``` sh
+./ircis examples/hello_world.txt
+```
+
+This will give the output in the console and generate the html vizualization as `output.html`

@@ -49,7 +49,7 @@ The Visualizer helps in understanding the movement of these different *Runner* o
 Here you can see the basic movement in the program
 <p align="center">
 	<img src="./screencaps/hello_world.gif" alt="Basic movement gif">
-	<a href="http://www.batman-nair.github.io/IRCIS/samples/hello_world.html" target="_blank"> HTML LINK </a>
+	<a href="https://batman-nair.github.io/IRCIS/samples/hello_world.html" target="_blank"> HTML LINK </a>
 </p>
 
 ### Stack operations
@@ -67,7 +67,7 @@ Here you can see the basic movement in the program
 Here you can see different arithmetic operations performed on numbers
 <p align="center">
 	<img src="./screencaps/calc.gif" alt="Basic arithmetic example">
-	<a href="http://www.batman-nair.github.io/IRCIS/samples/calc.html" target="_blank"> HTML LINK </a>
+	<a href="https://batman-nair.github.io/IRCIS/samples/calc.html" target="_blank"> HTML LINK </a>
 </p>
 
 ### Printing
@@ -83,7 +83,7 @@ Here you can see different arithmetic operations performed on numbers
 Here condition is checked if the loop number is divisible and loop is reached
 <p align="center">
 	<img src="./screencaps/factors.gif" alt="Basic condition example">
-	<a href="http://www.batman-nair.github.io/IRCIS/samples/factors.html" target="_blank"> HTML LINK </a>
+	<a href="https://batman-nair.github.io/IRCIS/samples/factors.html" target="_blank"> HTML LINK </a>
 </p>
 
 ### Splitting/Creating more Runners
@@ -95,7 +95,7 @@ Here condition is checked if the loop number is divisible and loop is reached
 A split is done where one flow divides the number by 2 whereas the other gets the modulo
 <p align="center">
 	<img src="./screencaps/num_to_binary_rev.gif" alt="Basic splitting example">
-	<a href="http://www.batman-nair.github.io/IRCIS/samples/num_to_binary_rev.html" target="_blank"> HTML LINK </a>
+	<a href="https://batman-nair.github.io/IRCIS/samples/num_to_binary_rev.html" target="_blank"> HTML LINK </a>
 </p>
 
 ### Variables
@@ -108,5 +108,5 @@ A split is done where one flow divides the number by 2 whereas the other gets th
 Local limit variable is used to store the loop end value, Global Flag is used to check if Fizz or Buzz has been printed
 <p align="center">
 	<img src="./screencaps/fizzbuzz.gif" alt="Vairable used to keep limit">
-	<a href="https://www.batman-nair.github.io/IRCIS/samples/fizzbuzz.html" target="_blank"> HTML LINK </a>
+	<a href="https://batman-nair.github.io/IRCIS/samples/fizzbuzz.html" target="_blank"> HTML LINK </a>
 </p>

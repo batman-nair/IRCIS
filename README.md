@@ -12,7 +12,7 @@ Based on the character read, the *Runner* object can change the direction of par
 Check out the command list to see all the commands implemented.
 The Visualizer helps in understanding the movement of these different *Runner* objects throughout the execution of the program.
 
-*Click on the HTML Link below the GIF to see the actual generated html*
+**Click on the HTML Link below the GIF to see the actual generated html**
 
 ## Character commands table
 
@@ -49,6 +49,7 @@ The Visualizer helps in understanding the movement of these different *Runner* o
 Here you can see the basic movement in the program
 <p align="center">
 	<img src="./screencaps/hello_world.gif" alt="Basic movement gif">
+	<a href="www.batman-nair.github.io/IRCIS/samples/hello_world.html"> HTML LINK </a>
 </p>
 
 ### Stack operations
@@ -66,6 +67,7 @@ Here you can see the basic movement in the program
 Here you can see different arithmetic operations performed on numbers
 <p align="center">
 	<img src="./screencaps/calc.gif" alt="Basic arithmetic example">
+	<a href="www.batman-nair.github.io/IRCIS/samples/calc.html"> HTML LINK </a>
 </p>
 
 ### Printing
@@ -81,6 +83,7 @@ Here you can see different arithmetic operations performed on numbers
 Here condition is checked if the loop number is divisible and loop is reached
 <p align="center">
 	<img src="./screencaps/factors.gif" alt="Basic condition example">
+	<a href="www.batman-nair.github.io/IRCIS/samples/factors.html"> HTML LINK </a>
 </p>
 
 ### Splitting/Creating more Runners
@@ -92,7 +95,7 @@ Here condition is checked if the loop number is divisible and loop is reached
 A split is done where one flow divides the number by 2 whereas the other gets the modulo
 <p align="center">
 	<img src="./screencaps/num_to_binary_rev.gif" alt="Basic splitting example">
-	<a href="./samples/num_to_binary_rev.html"> HTML LINK <\a>
+	<a href="www.batman-nair.github.io/IRCIS/samples/num_to_binary_rev.html"> HTML LINK </a>
 </p>
 
 ### Variables
@@ -105,4 +108,5 @@ A split is done where one flow divides the number by 2 whereas the other gets th
 Local limit variable is used to store the loop end value, Global Flag is used to check if Fizz or Buzz has been printed
 <p align="center">
 	<img src="./screencaps/fizzbuzz.gif" alt="Vairable used to keep limit">
+	<a href="www.batman-nair.github.io/IRCIS/samples/fizzbuzz.html"> HTML LINK </a>
 </p>

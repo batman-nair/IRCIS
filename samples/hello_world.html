@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    font-family: "Courier New", Courier, monospace;
+    background: #f5eded;
+}
+.program-name {
+    text-align: center;
+}
+.grid-container {
+  background-color: #3e3636;
+  display: grid;
+grid-template-columns: repeat(25, auto);
+
+  grid-auto-rows: 1fr;
+  padding: 8px;
+}
+
+.invis-boi {
+    /* border: 1px solid rgba(0, 0, 0, 0.1); */
+    width: 0%;
+    padding-bottom: 100%;
+}
+.grid-item {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* border: 1px solid rgba(0, 0, 0, 0.1); */
+    width: 100%;
+    padding-top: 100%;
+}
+.text {
+    position: absolute;
+    top: -25%;
+    padding-top: 50%;
+    height: 100%;
+    width: 100%;
+    font-size: 1vw; /*have to find a good value for this*/
+    text-align: center;
+    color: black;
+    background: none;
+    border: none;
+    resize: none;
+    user-select: none;
+}
+
+.sp {
+  background-color: #d72323;
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 8px;
+  text-align: center;
+  z-index: 10;
+  transition: 1s;
+  margin-right: -0%;
+  margin-left: 0%;
+  margin-top: 0%;
+  margin-bottom: -0%;
+  border-radius: 10%;
+}
+.output-container {
+    text-align: center;
+}
+.output {
+  content: "-";
+  white-space: pre;
+}
+.num0 {
+  animation: anim0 9s forwards;
+}
+@keyframes anim0 {
+0% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+0.704225% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+1.40845% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+2.11268% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+2.8169% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+3.52113% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+4.22535% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+4.92958% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+5.6338% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+6.33803% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+7.04225% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+7.74648% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+8.45071% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+9.15493% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+9.85916% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+10.5634% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+11.2676% {
+  margin-right: -1500%;
+  margin-left: 1500%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+11.9718% {
+  margin-right: -1600%;
+  margin-left: 1600%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+12.6761% {
+  margin-right: -1700%;
+  margin-left: 1700%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+13.3803% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+14.0845% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+14.7887% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+15.493% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+16.1972% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+16.9014% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+17.6056% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+18.3099% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+19.0141% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+19.7183% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+20.4225% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+21.1268% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+21.831% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+22.5352% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+23.2394% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+23.9437% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+24.6479% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+25.3521% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+26.0563% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+26.7606% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+27.4648% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+28.169% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+28.8732% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+29.5775% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+30.2817% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+30.9859% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+31.6901% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+32.3944% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+33.0986% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+33.8028% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+34.507% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+35.2113% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+35.9155% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+36.6197% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+37.3239% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+38.0282% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+38.7324% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+39.4366% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+40.1408% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+40.8451% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+41.5493% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+42.2535% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+42.9577% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+43.6619% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+44.3662% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+45.0704% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+45.7746% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+46.4788% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+47.1831% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+47.8873% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+48.5915% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+49.2957% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+50% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+50.7042% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+51.4084% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+52.1126% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+52.8169% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+53.5211% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+54.2253% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+54.9295% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+55.6338% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+56.338% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+57.0422% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+57.7464% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+58.4506% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+59.1549% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+59.8591% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+60.5633% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+61.2675% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+61.9718% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+62.676% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+63.3802% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+64.0844% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+64.7887% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+65.4929% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+66.1971% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+66.9013% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+67.6056% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+68.3098% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+69.014% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+69.7182% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+70.4224% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+71.1267% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+71.8309% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+72.5351% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+73.2393% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+73.9436% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+74.6478% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+75.352% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+76.0562% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+76.7605% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+77.4647% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+78.1689% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+78.8731% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+79.5774% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+80.2816% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+80.9858% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+81.69% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+82.3942% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+83.0985% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+83.8027% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+84.5069% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+85.2111% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+85.9154% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+86.6196% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+87.3238% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+88.028% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+88.7323% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+89.4365% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+90.1407% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+90.8449% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+91.5492% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+92.2534% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+92.9576% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+93.6618% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+94.3661% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+95.0703% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+95.7745% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+96.4787% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+97.1829% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+97.8872% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+98.5914% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+99.2956% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+99.9998% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+100% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+}
+.output:after {
+  animation: output-anim 9s forwards;
+  content: "--";
+}
+
+@keyframes output-anim {
+  0% {
+    content: "";
+  }
+15.393% {
+  content: "";
+  background: none;\n}
+15.493% {
+  content: "H";
+  background: black;\n}
+15.593% {
+  content: "H";
+  background: none;\n}
+22.4352% {
+  content: "H";
+  background: none;\n}
+22.5352% {
+  content: "He";
+  background: black;\n}
+22.6352% {
+  content: "He";
+  background: none;\n}
+29.4775% {
+  content: "He";
+  background: none;\n}
+29.5775% {
+  content: "Hel";
+  background: black;\n}
+29.6775% {
+  content: "Hel";
+  background: none;\n}
+36.5197% {
+  content: "Hel";
+  background: none;\n}
+36.6197% {
+  content: "Hell";
+  background: black;\n}
+36.7197% {
+  content: "Hell";
+  background: none;\n}
+43.562% {
+  content: "Hell";
+  background: none;\n}
+43.662% {
+  content: "Hello";
+  background: black;\n}
+43.762% {
+  content: "Hello";
+  background: none;\n}
+50.6042% {
+  content: "Hello";
+  background: none;\n}
+50.7042% {
+  content: "Hello ";
+  background: black;\n}
+50.8042% {
+  content: "Hello ";
+  background: none;\n}
+57.6465% {
+  content: "Hello ";
+  background: none;\n}
+57.7465% {
+  content: "Hello W";
+  background: black;\n}
+57.8465% {
+  content: "Hello W";
+  background: none;\n}
+64.6887% {
+  content: "Hello W";
+  background: none;\n}
+64.7887% {
+  content: "Hello Wo";
+  background: black;\n}
+64.8887% {
+  content: "Hello Wo";
+  background: none;\n}
+71.731% {
+  content: "Hello Wo";
+  background: none;\n}
+71.831% {
+  content: "Hello Wor";
+  background: black;\n}
+71.931% {
+  content: "Hello Wor";
+  background: none;\n}
+78.7732% {
+  content: "Hello Wor";
+  background: none;\n}
+78.8732% {
+  content: "Hello Worl";
+  background: black;\n}
+78.9732% {
+  content: "Hello Worl";
+  background: none;\n}
+85.8155% {
+  content: "Hello Worl";
+  background: none;\n}
+85.9155% {
+  content: "Hello World";
+  background: black;\n}
+86.0155% {
+  content: "Hello World";
+  background: none;\n}
+92.8577% {
+  content: "Hello World";
+  background: none;\n}
+92.9577% {
+  content: "Hello World!";
+  background: black;\n}
+93.0577% {
+  content: "Hello World!";
+  background: none;\n}
+99.9% {
+  content: "Hello World!";
+  background: none;\n}
+100% {
+  content: "Hello World!\A ";
+  background: black;\n}
+100.1% {
+  content: "Hello World!\A ";
+  background: none;\n}
+100% {
+  content: "Hello World!\A ";
+  background: none;\n}
+}
+
+}
+
+</style>
+</head>
+<body>
+  <h3 class="program-name">
+examples/hello_world.txt</h1>
+  <div class="grid-container">
+<div class="grid-item" style="grid-row:1; grid-column:1"><textarea class="text" readonly>v</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:8"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:15"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:1"><textarea class="text" readonly>></textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:3"><textarea class="text" readonly>"</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:4"><textarea class="text" readonly>!</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:5"><textarea class="text" readonly>d</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:6"><textarea class="text" readonly>l</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:7"><textarea class="text" readonly>r</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:8"><textarea class="text" readonly>o</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:9"><textarea class="text" readonly>W</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:10"><textarea class="text" readonly> </textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:11"><textarea class="text" readonly>o</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:12"><textarea class="text" readonly>l</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:13"><textarea class="text" readonly>l</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:14"><textarea class="text" readonly>e</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:15"><textarea class="text" readonly>H</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:16"><textarea class="text" readonly>"</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:19"><textarea class="text" readonly>></textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:21"><textarea class="text" readonly>#</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:23"><textarea class="text" readonly>v</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:1"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:8"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:15"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:19"><textarea class="text" readonly>^</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:23"><textarea class="text" readonly><</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:1"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:8"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:15"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="num0 sp"></div>
+
+  </div>
+
+  <div class="output-container">
+    <p>OUTPUT: </p>
+    <p><span class="output"></span></p>
+  </div>
+
+</body>
+</html>

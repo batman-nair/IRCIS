@@ -1,0 +1,4293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    font-family: "Courier New", Courier, monospace;
+    background: #f5eded;
+}
+.program-name {
+    text-align: center;
+}
+.grid-container {
+  background-color: #3e3636;
+  display: grid;
+grid-template-columns: repeat(30, auto);
+
+  grid-auto-rows: 1fr;
+  padding: 8px;
+}
+
+.invis-boi {
+    /* border: 1px solid rgba(0, 0, 0, 0.1); */
+    width: 0%;
+    padding-bottom: 100%;
+}
+.grid-item {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* border: 1px solid rgba(0, 0, 0, 0.1); */
+    width: 100%;
+    padding-top: 100%;
+}
+.text {
+    position: absolute;
+    top: -25%;
+    padding-top: 50%;
+    height: 100%;
+    width: 100%;
+    font-size: 1vw; /*have to find a good value for this*/
+    text-align: center;
+    color: black;
+    background: none;
+    border: none;
+    resize: none;
+    user-select: none;
+}
+
+.sp {
+  background-color: #d72323;
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 8px;
+  text-align: center;
+  z-index: 10;
+  transition: 1s;
+  margin-right: -0%;
+  margin-left: 0%;
+  margin-top: 0%;
+  margin-bottom: -0%;
+  border-radius: 10%;
+}
+.output-container {
+    text-align: center;
+}
+.output {
+  content: "-";
+  white-space: pre;
+}
+.num0 {
+  animation: anim0 11s forwards;
+}
+@keyframes anim0 {
+0% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+0.606061% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+1.21212% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+1.81818% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+2.42424% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+3.0303% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+3.63636% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+4.24242% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 1;
+}
+4.84848% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+5.45455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+6.06061% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+6.66667% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+7.27273% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+7.87879% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+8.48485% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+9.09091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 1;
+}
+9.69697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 1;
+}
+10.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+10.9091% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+11.5152% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+12.1212% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+12.7273% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+13.3333% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+13.9394% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+14.5455% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+15.1515% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+15.7576% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+16.3636% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+16.9697% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+17.5758% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+18.1818% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+18.7879% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+19.3939% {
+  margin-right: -1500%;
+  margin-left: 1500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+20% {
+  margin-right: -1600%;
+  margin-left: 1600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+20.6061% {
+  margin-right: -1700%;
+  margin-left: 1700%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+21.2121% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+21.8182% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+22.4242% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+23.0303% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+23.6364% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+24.2424% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+100% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+}
+.num1 {
+  animation: anim1 11s forwards;
+}
+@keyframes anim1 {
+0% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+0.606061% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+1.21212% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+1.81818% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+2.42424% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+3.0303% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+3.63636% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+4.24242% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+4.84848% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+5.45455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+6.06061% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+6.66667% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+7.27273% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+7.87879% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+8.48485% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+9.09091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+9.69697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 0;
+}
+10.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+10.9091% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+11.5152% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+12.1212% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+12.7273% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+13.3333% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+13.9394% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+14.5455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 1;
+}
+15.1515% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 1;
+}
+15.7576% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+16.3636% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+16.9697% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+17.5758% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+18.1818% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+18.7879% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+19.3939% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+20% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+20.6061% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+21.2121% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+21.8182% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+22.4242% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+23.0303% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+23.6364% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+24.2424% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+24.8485% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+25.4545% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+26.0606% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+26.6667% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+27.2727% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+27.8788% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+28.4848% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+29.0909% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+29.697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+30.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+30.9091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 1;
+}
+31.5151% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 1;
+}
+32.1212% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+32.7273% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+33.3333% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+33.9394% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+34.5454% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+35.1515% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+35.7576% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+36.3636% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+36.9697% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+37.5757% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+38.1818% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+38.7879% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+39.3939% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+40% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+40.606% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+41.2121% {
+  margin-right: -1500%;
+  margin-left: 1500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+41.8182% {
+  margin-right: -1600%;
+  margin-left: 1600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+42.4242% {
+  margin-right: -1700%;
+  margin-left: 1700%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+43.0303% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+43.6363% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+44.2424% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+44.8485% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+45.4545% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+46.0606% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+100% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+}
+.num2 {
+  animation: anim2 11s forwards;
+}
+@keyframes anim2 {
+0% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+0.606061% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+1.21212% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+1.81818% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+2.42424% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+3.0303% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+3.63636% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+4.24242% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+4.84848% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+5.45455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+6.06061% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+6.66667% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+7.27273% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+7.87879% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+8.48485% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+9.09091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+9.69697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 0;
+}
+10.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+10.9091% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+11.5152% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+12.1212% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+12.7273% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+13.3333% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+13.9394% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+14.5455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+15.1515% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+15.7576% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+16.3636% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+16.9697% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+17.5758% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+18.1818% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+18.7879% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+19.3939% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+20% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+20.6061% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+21.2121% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+21.8182% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+22.4242% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+23.0303% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+23.6364% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+24.2424% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+24.8485% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+25.4545% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+26.0606% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+26.6667% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+27.2727% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+27.8788% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+28.4848% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+29.0909% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+29.697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+30.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+30.9091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+31.5151% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+32.1212% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+32.7273% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+33.3333% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+33.9394% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+34.5454% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+35.1515% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+35.7576% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+36.3636% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 1;
+}
+36.9697% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 1;
+}
+37.5757% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+38.1818% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+38.7879% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+39.3939% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+40% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+40.606% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+41.2121% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+41.8182% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+42.4242% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+43.0303% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+43.6363% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+44.2424% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+44.8485% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+45.4545% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+46.0606% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+46.6666% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+47.2727% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+47.8788% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+48.4848% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+49.0909% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+49.6969% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+50.303% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+50.9091% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+51.5151% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+52.1212% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+52.7272% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 1;
+}
+53.3333% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 1;
+}
+53.9394% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+54.5454% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+55.1515% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+55.7575% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+56.3636% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+56.9697% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+57.5757% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+58.1818% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+58.7878% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+59.3939% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+60% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+60.606% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+61.2121% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+61.8181% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+62.4242% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+63.0303% {
+  margin-right: -1500%;
+  margin-left: 1500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+63.6363% {
+  margin-right: -1600%;
+  margin-left: 1600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+64.2424% {
+  margin-right: -1700%;
+  margin-left: 1700%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+64.8484% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+65.4545% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+66.0606% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+66.6666% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+67.2727% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+67.8788% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+100% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+}
+.num3 {
+  animation: anim3 11s forwards;
+}
+@keyframes anim3 {
+0% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+0.606061% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+1.21212% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+1.81818% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+2.42424% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+3.0303% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+3.63636% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+4.24242% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+4.84848% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+5.45455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+6.06061% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+6.66667% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+7.27273% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+7.87879% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+8.48485% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+9.09091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+9.69697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 0;
+}
+10.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+10.9091% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+11.5152% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+12.1212% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+12.7273% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+13.3333% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+13.9394% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+14.5455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+15.1515% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+15.7576% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+16.3636% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+16.9697% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+17.5758% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+18.1818% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+18.7879% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+19.3939% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+20% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+20.6061% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+21.2121% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+21.8182% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+22.4242% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+23.0303% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+23.6364% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+24.2424% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+24.8485% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+25.4545% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+26.0606% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+26.6667% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+27.2727% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+27.8788% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+28.4848% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+29.0909% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+29.697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+30.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+30.9091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+31.5151% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+32.1212% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+32.7273% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+33.3333% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+33.9394% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+34.5454% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+35.1515% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+35.7576% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+36.3636% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+36.9697% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+37.5757% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+38.1818% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+38.7879% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+39.3939% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+40% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+40.606% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+41.2121% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+41.8182% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+42.4242% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+43.0303% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+43.6363% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+44.2424% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+44.8485% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+45.4545% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+46.0606% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+46.6666% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+47.2727% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+47.8788% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+48.4848% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+49.0909% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+49.6969% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+50.303% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+50.9091% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+51.5151% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+52.1212% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+52.7272% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+53.3333% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+53.9394% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+54.5454% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+55.1515% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+55.7575% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+56.3636% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+56.9697% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+57.5757% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+58.1818% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 1;
+}
+58.7878% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 1;
+}
+59.3939% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+60% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+60.606% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+61.2121% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+61.8181% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+62.4242% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+63.0303% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+63.6363% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+64.2424% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+64.8484% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+65.4545% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+66.0606% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+66.6666% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+67.2727% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+67.8788% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+68.4848% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+69.0909% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+69.697% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+70.303% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+70.9091% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+71.5152% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+72.1212% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+72.7273% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+73.3333% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+73.9394% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+74.5455% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 1;
+}
+75.1515% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 1;
+}
+75.7576% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+76.3637% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+76.9697% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+77.5758% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+78.1819% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+78.7879% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+79.394% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+80% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+80.6061% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+81.2122% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+81.8182% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+82.4243% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+83.0304% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+83.6364% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+84.2425% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+84.8486% {
+  margin-right: -1500%;
+  margin-left: 1500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+85.4546% {
+  margin-right: -1600%;
+  margin-left: 1600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+86.0607% {
+  margin-right: -1700%;
+  margin-left: 1700%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+86.6667% {
+  margin-right: -1800%;
+  margin-left: 1800%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+87.2728% {
+  margin-right: -1900%;
+  margin-left: 1900%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+87.8789% {
+  margin-right: -2000%;
+  margin-left: 2000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+88.4849% {
+  margin-right: -2100%;
+  margin-left: 2100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+89.091% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+89.6971% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+100% {
+  margin-right: -2200%;
+  margin-left: 2200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+}
+.num4 {
+  animation: anim4 11s forwards;
+}
+@keyframes anim4 {
+0% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+0.606061% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+1.21212% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+1.81818% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+2.42424% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+3.0303% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+3.63636% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+4.24242% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 000%;
+  margin-bottom: -000%;
+  opacity: 0;
+}
+4.84848% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+5.45455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+6.06061% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+6.66667% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+7.27273% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+7.87879% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+8.48485% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+9.09091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 100%;
+  margin-bottom: -100%;
+  opacity: 0;
+}
+9.69697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 200%;
+  margin-bottom: -200%;
+  opacity: 0;
+}
+10.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+10.9091% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+11.5152% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+12.1212% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+12.7273% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+13.3333% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+13.9394% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+14.5455% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+15.1515% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+15.7576% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+16.3636% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+16.9697% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+17.5758% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+18.1818% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+18.7879% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+19.3939% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+20% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+20.6061% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+21.2121% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+21.8182% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+22.4242% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+23.0303% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+23.6364% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+24.2424% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+24.8485% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+25.4545% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+26.0606% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+26.6667% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+27.2727% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+27.8788% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+28.4848% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+29.0909% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+29.697% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+30.303% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+30.9091% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+31.5151% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+32.1212% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+32.7273% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+33.3333% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+33.9394% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+34.5454% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+35.1515% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+35.7576% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+36.3636% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+36.9697% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+37.5757% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+38.1818% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+38.7879% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+39.3939% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+40% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+40.606% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+41.2121% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+41.8182% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+42.4242% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+43.0303% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+43.6363% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+44.2424% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+44.8485% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+45.4545% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+46.0606% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+46.6666% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+47.2727% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+47.8788% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+48.4848% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+49.0909% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+49.6969% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+50.303% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+50.9091% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+51.5151% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+52.1212% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+52.7272% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+53.3333% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+53.9394% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+54.5454% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+55.1515% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+55.7575% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+56.3636% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+56.9697% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+57.5757% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+58.1818% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+58.7878% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+59.3939% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+60% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+60.606% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+61.2121% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+61.8181% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+62.4242% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+63.0303% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+63.6363% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+64.2424% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+64.8484% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+65.4545% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+66.0606% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+66.6666% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+67.2727% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+67.8788% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+68.4848% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+69.0909% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+69.697% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+70.303% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+70.9091% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+71.5152% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+72.1212% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+72.7273% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+73.3333% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 0;
+}
+73.9394% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 0;
+}
+74.5455% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 0;
+}
+75.1515% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 0;
+}
+75.7576% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+76.3637% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+76.9697% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+77.5758% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+78.1819% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+78.7879% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+79.394% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+80% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 1;
+}
+80.6061% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 1;
+}
+81.2122% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+81.8182% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+82.4243% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+83.0304% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+83.6364% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+84.2425% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+84.8486% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+85.4546% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+86.0607% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+86.6667% {
+  margin-right: -1400%;
+  margin-left: 1400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+87.2728% {
+  margin-right: -1300%;
+  margin-left: 1300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+87.8789% {
+  margin-right: -1200%;
+  margin-left: 1200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+88.4849% {
+  margin-right: -1100%;
+  margin-left: 1100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+89.091% {
+  margin-right: -1000%;
+  margin-left: 1000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+89.6971% {
+  margin-right: -900%;
+  margin-left: 900%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+90.3031% {
+  margin-right: -800%;
+  margin-left: 800%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+90.9092% {
+  margin-right: -700%;
+  margin-left: 700%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+91.5153% {
+  margin-right: -600%;
+  margin-left: 600%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+92.1213% {
+  margin-right: -500%;
+  margin-left: 500%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+92.7274% {
+  margin-right: -400%;
+  margin-left: 400%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+93.3335% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+93.9395% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+94.5456% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+95.1516% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 700%;
+  margin-bottom: -700%;
+  opacity: 1;
+}
+95.7577% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 600%;
+  margin-bottom: -600%;
+  opacity: 1;
+}
+96.3638% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 500%;
+  margin-bottom: -500%;
+  opacity: 1;
+}
+96.9698% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 400%;
+  margin-bottom: -400%;
+  opacity: 1;
+}
+97.5759% {
+  margin-right: -000%;
+  margin-left: 000%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+98.182% {
+  margin-right: -100%;
+  margin-left: 100%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+98.788% {
+  margin-right: -200%;
+  margin-left: 200%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+99.3941% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 1;
+}
+100% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+100% {
+  margin-right: -300%;
+  margin-left: 300%;
+  margin-top: 300%;
+  margin-bottom: -300%;
+  opacity: 0;
+}
+}
+.output:after {
+  animation: output-anim 11s forwards;
+  content: "--";
+}
+
+@keyframes output-anim {
+  0% {
+    content: "";
+  }
+22.9303% {
+  content: "";
+  background: none;\n}
+23.0303% {
+  content: "0";
+  background: black;\n}
+23.1303% {
+  content: "0";
+  background: none;\n}
+44.7485% {
+  content: "0";
+  background: none;\n}
+44.8485% {
+  content: "01";
+  background: black;\n}
+44.9485% {
+  content: "01";
+  background: none;\n}
+66.5667% {
+  content: "01";
+  background: none;\n}
+66.6667% {
+  content: "011";
+  background: black;\n}
+66.7667% {
+  content: "011";
+  background: none;\n}
+88.3848% {
+  content: "011";
+  background: none;\n}
+88.4848% {
+  content: "0111";
+  background: black;\n}
+88.5848% {
+  content: "0111";
+  background: none;\n}
+100% {
+  content: "0111";
+  background: none;\n}
+}
+
+}
+
+</style>
+</head>
+<body>
+  <h3 class="program-name">
+examples/num_to_binary_rev.txt</h1>
+  <div class="grid-container">
+<div class="grid-item" style="grid-row:1; grid-column:1"><textarea class="text" readonly>></textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:3"><textarea class="text" readonly>'</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:4"><textarea class="text" readonly>1</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:5"><textarea class="text" readonly>4</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:8"><textarea class="text" readonly>v</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:12"><textarea class="text" readonly>P</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:13"><textarea class="text" readonly>r</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:14"><textarea class="text" readonly>i</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:15"><textarea class="text" readonly>n</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:16"><textarea class="text" readonly>t</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:17"><textarea class="text" readonly>s</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:18"><textarea class="text" readonly> </textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:19"><textarea class="text" readonly>b</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:20"><textarea class="text" readonly>i</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:21"><textarea class="text" readonly>n</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:22"><textarea class="text" readonly>a</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:23"><textarea class="text" readonly>r</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:24"><textarea class="text" readonly>y</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:25"><textarea class="text" readonly> </textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:1; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:1"><textarea class="text" readonly>v</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:8"><textarea class="text" readonly><</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:13"><textarea class="text" readonly>i</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:14"><textarea class="text" readonly>n</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:15"><textarea class="text" readonly> </textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:16"><textarea class="text" readonly>r</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:17"><textarea class="text" readonly>e</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:18"><textarea class="text" readonly>v</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:19"><textarea class="text" readonly>e</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:20"><textarea class="text" readonly>r</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:21"><textarea class="text" readonly>s</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:22"><textarea class="text" readonly>e</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:2; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:1"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:8"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:15"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:3; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:1"><textarea class="text" readonly>></textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:4"><textarea class="text" readonly>?</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:7"><textarea class="text" readonly>*</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:8"><textarea class="text" readonly>></textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:11"><textarea class="text" readonly>'</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:12"><textarea class="text" readonly>2</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:14"><textarea class="text" readonly>@</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:15"><textarea class="text" readonly>1</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:17"><textarea class="text" readonly>'</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:18"><textarea class="text" readonly>%</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:21"><textarea class="text" readonly>#</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:23"><textarea class="text" readonly>!</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:4; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:1"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:7"><textarea class="text" readonly>v</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:8"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:15"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:5; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:1"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:8"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:15"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:6; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:1"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:7"><textarea class="text" readonly>></textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:8"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:15"><textarea class="text" readonly>v</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:7; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:1"><textarea class="text" readonly>^</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:4"><textarea class="text" readonly>/</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:5"><textarea class="text" readonly>'</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:8"><textarea class="text" readonly>1</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:9"><textarea class="text" readonly>@</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:12"><textarea class="text" readonly>2</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:13"><textarea class="text" readonly>'</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:15"><textarea class="text" readonly><</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:8; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:1"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:2"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:3"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:4"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:5"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:6"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:7"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:8"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:9"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:10"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:11"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:12"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:13"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:14"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:15"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:16"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:17"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:18"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:19"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:20"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:21"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:22"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:23"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:24"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:25"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:26"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:27"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:28"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:29"><textarea class="text" readonly>.</textarea></div>
+<div class="grid-item" style="grid-row:9; grid-column:30"><textarea class="text" readonly>.</textarea></div>
+<div class="num0 sp"></div>
+<div class="num1 sp"></div>
+<div class="num2 sp"></div>
+<div class="num3 sp"></div>
+<div class="num4 sp"></div>
+
+  </div>
+
+  <div class="output-container">
+    <p>OUTPUT: </p>
+    <p><span class="output"></span></p>
+  </div>
+
+</body>
+</html>

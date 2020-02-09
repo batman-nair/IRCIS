@@ -16,7 +16,7 @@ Based on the character read, the *Runner* object can change the direction of par
 Check out the command list to see all the commands implemented.
 The Visualizer helps in understanding the movement of these different *Runner* objects throughout the execution of the program.
 
-**Click on the HTML Link below the GIFs to see the actual generated html**
+**Click on the HTML Link below the GIFs to see the actual generated html in its full glory**
 
 ## Character commands table
 

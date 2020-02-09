@@ -12,6 +12,7 @@ Based on the character read, the *Runner* object can change the direction of par
 Check out the command list to see all the commands implemented.
 The Visualizer helps in understanding the movement of these different *Runner* objects throughout the execution of the program.
 
+*Click on the HTML Link below the GIF to see the actual generated html*
 
 ## Character commands table
 
@@ -91,6 +92,7 @@ Here condition is checked if the loop number is divisible and loop is reached
 A split is done where one flow divides the number by 2 whereas the other gets the modulo
 <p align="center">
 	<img src="./screencaps/num_to_binary_rev.gif" alt="Basic splitting example">
+	<a href="./samples/num_to_binary_rev.html"> HTML LINK <\a>
 </p>
 
 ### Variables

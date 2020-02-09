@@ -119,7 +119,7 @@ A local 'limit' variable is used to store the loop end value, Global 'Flag' is u
 
 ## How to compile and run
 
-Just run `./build.sh` to compile the program with the tests and creates the final executable with a single command.
+Just run `./build.sh` to compile the program with the tests and create the final executable with a single command.
 
 You can run the program with
 ``` sh

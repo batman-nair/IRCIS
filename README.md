@@ -119,7 +119,9 @@ A local 'limit' variable is used to store the loop end value, Global 'Flag' is u
 
 ## How to compile and run
 
-Just run `./build.sh` to compile the program with the tests and create the final executable with a single command.
+When cloning the repo, use `git clone --recursive` so that googletest module is also cloned in.
+
+Run `./build.sh` to compile the program with the tests and create the final executable with a single command. Manual building can be done using cmake.
 
 You can run the program with
 ``` sh

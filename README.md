@@ -126,4 +126,28 @@ You can run the program with
 ./ircis examples/hello_world.txt
 ```
 
-This will give the output in the console and generate the html vizualization as `output.html`
+You can run the program on multiple input grids sequentially by just supplying additional parameters, like
+``` sh
+./ircis examples/hello_world.txt /examples/fizbuzz.txt
+```
+
+This will give the output in the console and generate the html vizualization of the final input file as `output.html`
+
+
+## Options
+
+Normally, the runner starts at (0, 0) and headed East. You can specify the starting position of the initial runner and its direction with the options
+```
+-x,--startx num         Starting x position (Default: 0)
+-y,--starty num         Starting y position (Default: 0)
+-d,--direction [NSEW]   Specify the starting direction (Default: E)
+```
+
+You can see how this works with these examples:
+``` sh
+./ircis examples/options.txt 
+./ircis examples/options.txt -x 49 -y 21 -d N
+./ircis examples/options.txt -x 2 -y 2 -d S
+./ircis examples/options.txt --startx 59 --starty 12 --direction W
+```
+

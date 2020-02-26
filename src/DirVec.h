@@ -12,14 +12,17 @@ namespace Ircis {
   };
   Direction get_right(const Direction& dir);
   Direction get_left(const Direction& dir);
+  Direction from_char(char start_direction_char);
+
 
   class DirVec {
   public:
-    DirVec()
-      : xx(0), yy(0), direction(Direction::EAST) { }
 
     DirVec(int start_x, int start_y, Direction start_dir)
       : xx(start_x), yy(start_y), direction(start_dir) { }
+
+    DirVec(int start_x, int start_y, char start_direction_char)
+      : xx(start_x), yy(start_y), direction(from_char(start_direction_char)) { }
 
     void update();
 

@@ -19,6 +19,15 @@ namespace Ircis {
     default:     return NORTH;
     }
   }
+  Direction from_char(char start_direction_char) {
+    switch(start_direction_char) {
+    case 'N':  return NORTH;
+    case 'E':  return EAST;
+    case 'S':  return SOUTH;
+    case 'W':  return WEST;
+    default:   return EAST;
+    }
+  }
 
   std::ostream& operator<<(std::ostream& os, const Direction& dir) {
     char ch = 'X';

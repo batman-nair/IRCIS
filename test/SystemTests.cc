@@ -20,6 +20,10 @@ namespace Ircis {
     Ircis calc_{"calc.txt", output_, true};
     Ircis factors_{"factors.txt", output_, true};
     Ircis num2bin_{"num2bin.txt", output_, true};
+    Ircis options_{"options.txt", output_, true};
+    Ircis options_n_{"options.txt", 49, 21, 'N', output_, true};
+    Ircis options_s_{"options.txt", 2, 2, 'S', output_, true};
+    Ircis options_w_{"options.txt", 59, 12, 'W', output_, true};
   };
 
   TEST_F(SystemTests, HelloWorldOutput) {
@@ -45,6 +49,26 @@ namespace Ircis {
   TEST_F(SystemTests, Num2BinOutput) {
     while (num2bin_.update());
     ASSERT_EQ("0111 ", getline(*output_));
+    output_->clear();
+  }
+  TEST_F(SystemTests, OptionsOutput) {
+    while (options_.update());
+    ASSERT_EQ("This starts with the default of (0, 0) and E.", getline(*output_));
+    output_->clear();
+  }
+  TEST_F(SystemTests, OptionsNOutput) {
+    while (options_n_.update());
+    ASSERT_EQ("This starts with (49, 21) and N.", getline(*output_));
+    output_->clear();
+  }
+  TEST_F(SystemTests, OptionsSOutput) {
+    while (options_s_.update());
+    ASSERT_EQ("This starts with (2, 2) and S.", getline(*output_));
+    output_->clear();
+  }
+  TEST_F(SystemTests, OptionsWOutput) {
+    while (options_w_.update());
+    ASSERT_EQ("This starts with (59, 12) and W.", getline(*output_));
     output_->clear();
   }
 }

@@ -63,11 +63,6 @@ namespace Ircis {
       path_ = path;
     }
 
-    Runner(int id, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
-	   std::shared_ptr<variable_map_t> global_var_map,
-	   std::shared_ptr<std::queue<RunnerInfo> > new_runners_list)
-      : Runner(id, {}, grid, log, global_var_map, new_runners_list) {
-    }
 
     // Update the Runner movement
     // Returns true if the Runner is still alive

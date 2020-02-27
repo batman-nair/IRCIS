@@ -11,7 +11,7 @@ static int parseInt(std::string str, std::string descr) {
   int to;
   try {
     to = std::stoi(str);
-  } catch (std::invalid_argument e) {
+  } catch (const std::invalid_argument& e) {
 		std::cerr << "Invalid value for " << descr << ": \"" << str << "\". "
 		      << "Expected an integer value." << std::endl;
 		exit(EXIT_FAILURE);
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
 
   if (optind < argc)
   {
-    while (optind < argc) 
+    while (optind < argc)
     {
       std::string file_name = argv[optind++];
       Ircis::Ircis ircis(file_name, startx, starty, direction);
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
       while (ircis.update());
     }
   }
-  else 
+  else
   {
     std::cout << "Required source file name argument" << std::endl;
     std::cout << "Usage: ircis <file_name> <option(s)>\n"

@@ -143,13 +143,13 @@ Normally, the runner starts at (0, 0) and headed East. You can specify the start
 -x,--startx num         Starting x position (Default: 0)
 -y,--starty num         Starting y position (Default: 0)
 -d,--direction [NSEW]   Specify the starting direction (Default: E)
+-s,--speed num          Set the speed for generated animation (Default: 15)
 ```
 
 You can see how this works with these examples:
 ``` sh
-./ircis examples/options.txt 
+./ircis examples/options.txt
 ./ircis examples/options.txt -x 49 -y 21 -d N
 ./ircis examples/options.txt -x 2 -y 2 -d S
 ./ircis examples/options.txt --startx 59 --starty 12 --direction W
 ```
-

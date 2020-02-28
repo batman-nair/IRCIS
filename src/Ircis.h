@@ -62,6 +62,10 @@ namespace Ircis {
       html_method_ = type;
     }
 
+    void set_animation_speed(const unsigned int& speed) {
+      animation_speed_ = speed;
+    }
+
   private:
     int runner_id_;
     std::shared_ptr<Logger> log_;
@@ -69,6 +73,7 @@ namespace Ircis {
     std::shared_ptr<variable_map_t> global_var_map_;
     std::vector<Runner> runner_list_;
 
+    unsigned int animation_speed_ = 15;
     std::string input_file_name_ = "";
     std::string html_method_ = "CSS";
     bool generate_html_ = false;

@@ -14,12 +14,14 @@ namespace Ircis {
     virtual ~HTMLVizBase() = default;
 
     virtual void generate_html() = 0;
+    void set_animation_speed(unsigned int animation_speed) { animation_speed_ = animation_speed; }
   protected:
     std::ofstream output_file_;
     std::vector<std::string> lines_;
     std::vector<MovementData> paths_;
     std::vector<std::pair<unsigned int, std::string>> time_output_data_;
     std::string input_file_name_;
+    unsigned int animation_speed_ = 15;
   };
 
   class HTMLVizCSS : public HTMLVizBase {

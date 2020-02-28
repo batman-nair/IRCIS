@@ -2,8 +2,6 @@
 
 #include <algorithm>
 
-#define STEPS_PER_SEC 15
-
 std::string sanitize_string(const std::string& str);
 
 const char* start_css = R"(<!DOCTYPE html>
@@ -126,7 +124,7 @@ namespace Ircis {
     float percent_inc = 100.0/max_path_length;
     for (const auto& data: paths_) {
       output_file_ << ".num" << runner_no << " {\n";
-      output_file_ << "  animation: anim" << runner_no << " " << max_path_length/STEPS_PER_SEC << "s forwards;\n";
+      output_file_ << "  animation: anim" << runner_no << " " << max_path_length/animation_speed_ << "s forwards;\n";
       output_file_ << "}\n";
       output_file_ << "@keyframes anim" << runner_no << " {\n";
       float current_percent = 0;
@@ -164,7 +162,7 @@ namespace Ircis {
     }
 
     output_file_ << ".output:after {\n";
-    output_file_ << "  animation: output-anim " << max_path_length/STEPS_PER_SEC << "s forwards;\n";
+    output_file_ << "  animation: output-anim " << max_path_length/animation_speed_ << "s forwards;\n";
     output_file_ << "  content: \"--\";\n";
     output_file_ << "}\n";
     output_file_ << start_output_anim;

@@ -58,6 +58,7 @@ namespace Ircis {
 				return std::make_unique<HTMLVizJS>("output.html", grid_->get_lines(), paths_, time_output_data_, input_file_name_);
 			    };
 	std::unique_ptr<HTMLVizBase> html_viz = html_factory();
+	html_viz->set_animation_speed(animation_speed_);
 	html_viz->generate_html();
       }
 

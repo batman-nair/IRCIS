@@ -34,23 +34,26 @@ int main(int argc, char *argv[]) {
   intmax_t startx;
   intmax_t starty;
   char direction;
+  intmax_t speed;
   /* Default values */
   startx = 0;
   starty = 0;
   direction = 'E';
+  speed = 15;
 
   static struct option const long_options[] =
   {
     {"startx", required_argument, NULL, 'x'},
     {"starty", required_argument, NULL, 'y'},
     {"direction", required_argument, NULL, 'd'},
+    {"speed", required_argument, NULL, 's'},
     {0, 0, 0, 0}
   };
 
   int option_index = 0;
   while (true)
   {
-    const auto opt = getopt_long(argc, argv, "x:y:d:", long_options, &option_index);
+    const auto opt = getopt_long(argc, argv, "x:y:d:s:", long_options, &option_index);
 
     if (-1 == opt)
       break;
@@ -67,6 +70,9 @@ int main(int argc, char *argv[]) {
       case 'd':
         direction = parseDir(optarg);
         break;
+      case 's':
+	speed = parseInt(optarg, "speed");
+	break;
       case 0:
         break;
     }
@@ -79,6 +85,7 @@ int main(int argc, char *argv[]) {
       std::string file_name = argv[optind++];
       Ircis::Ircis ircis(file_name, startx, starty, direction);
       ircis.set_generate_html("CSS");
+      ircis.set_animation_speed(speed);
       while (ircis.update());
     }
   }
@@ -90,6 +97,7 @@ int main(int argc, char *argv[]) {
       << "\t-x,--startx num\t\tStarting x position (Default: 0)\n"
       << "\t-y,--starty num\t\tStarting y position (Default: 0)\n"
       << "\t-d,--direction [NSEW]\tSpecify the starting direction (Default: E)"
+      << "\t-s,--speed [num]\tSet the speed for generated animation (Default: 15)"
       << std::endl;
     exit(EXIT_FAILURE);
   }

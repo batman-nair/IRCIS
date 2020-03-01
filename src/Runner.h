@@ -81,6 +81,7 @@ namespace Ircis {
     bool process_global_var_insert();
     bool process_local_var_fetch();
     bool process_local_var_insert();
+    void push_random_number_to_stack(int limit);
 
     int id_ = 0;
     DirVec position_;

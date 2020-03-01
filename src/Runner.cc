@@ -3,6 +3,7 @@
 #include <cctype>
 #include <sstream>
 #include <algorithm>
+#include <random>
 
 namespace Ircis {
   void Runner::run_debug() {
@@ -119,6 +120,20 @@ namespace Ircis {
 	set_error("False direction for check not found.");
 	return false;
       }
+    case CH_RAND_INT:
+      {
+	if (st_.empty()) {
+	  set_error("Empty stack when looking for random limit");
+	  return false;
+	}
+	Data dat = st_.top();
+	st_.pop();
+	push_random_number_to_stack(dat.value);
+	break;
+      }
+    case CH_RAND:
+      push_random_number_to_stack(1);
+      break;
     case CH_END:
       set_error("End character reached");
       return false;
@@ -394,6 +409,16 @@ namespace Ircis {
     log_line("Saving value ", st_.top(), " to variable ", var);
     var_map_[var] = st_.top();
     return true;
+  }
+
+  void Runner::push_random_number_to_stack(int limit) {
+    static std::random_device rd;
+    static std::default_random_engine re(rd());
+    std::uniform_int_distribution<int> dis(0, limit);
+
+    Data dat(dis(re), true);
+    log_line("Pushing random number to stack ", dat);
+    st_.push(dat);
   }
 
   template<typename T>

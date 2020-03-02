@@ -24,6 +24,7 @@ namespace Ircis {
     Ircis options_n_{"options.txt", 49, 21, 'N', output_, true};
     Ircis options_s_{"options.txt", 2, 2, 'S', output_, true};
     Ircis options_w_{"options.txt", 59, 12, 'W', output_, true};
+    Ircis random_{"random.txt", output_, true};
   };
 
   TEST_F(SystemTests, HelloWorldOutput) {
@@ -71,4 +72,10 @@ namespace Ircis {
     ASSERT_EQ("This starts with (59, 12) and W.", getline(*output_));
     output_->clear();
   }
+  TEST_F(SystemTests, RandomOutput) {
+    while (random_.update());
+    ASSERT_EQ(2, getline(*output_).size()); // How else to test random numbers? :/
+    output_->clear();
+  }
+
 }

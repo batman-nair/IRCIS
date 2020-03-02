@@ -30,12 +30,15 @@ The Visualizer helps in understanding the movement of these different *Runner* o
 | \<space\> . | Blanks, Ignored                                            |
 | "           | Toggles *Stack* mode                                       |
 | '           | Goes to *Integer* mode                                     |
-| @\<n\>       | Push n'th index element of stack to top. @0 duplicates top |
-| &\<n\>       | Pop n elements from stack                                  |
+| @\<n\>      | Push n'th index element of stack to top. @0 duplicates top |
+| &\<n\>      | Pop n elements from stack                                  |
 | ?           | Check stack top. If true then continue, else go right/left |
 | *           | Split into multiple Runners                                |
-| @\<str\>    | Push value in variable \<str\> to stack                     |
-| &\<str\>    | Set value in stack top to variable \<str\>                  |
+| @\<str\>    | Push value in variable \<str\> to stack                    |
+| &\<str\>    | Set value in stack top to variable \<str\>                 |
+| r           | Generate a random 0 or 1 and push to stack                 |
+| R           | Push random number between 0 and *limit* to stack          |
+| p           | Pause the Runner stack top number of ticks                 |
 |             |                                                            |
 
 
@@ -112,8 +115,19 @@ A split is done where one flow divides the number by 2 whereas the other gets th
 
 A local 'limit' variable is used to store the loop end value, Global 'Flag' is used to check if Fizz or Buzz has been printed
 <p align="center">
-	<img src="https://github.com/batman-nair/IRCIS/blob/master/screencaps/fizzbuzz.gif" alt="Vairable used to keep limit">
+	<img src="https://github.com/batman-nair/IRCIS/blob/master/screencaps/fizzbuzz.gif" alt="Variables used to keep limit">
 	<a href="https://batman-nair.github.io/IRCIS/samples/fizzbuzz.html" target="_blank"> HTML LINK </a>
+</p>
+
+### Random values and Visual Pause
+- 'r' operator generates a random 0 or 1 value and pushes to stack.
+- 'R' operator pops a *limit* value from stack and generates a random value between 0 and *limit* and pushes it to stack.
+- 'p' operator pauses Runner execution stack top number of ticks. The stack top is popped.
+
+Random values and pauses are used to create a racing track for Runner's with random paths and random pauses.
+<p align="center">
+	<img src="https://github.com/batman-nair/IRCIS/blob/master/screencaps/racetrack.gif" alt="Racetrack for runners with randoms and pauses">
+	<a href="https://batman-nair.github.io/IRCIS/samples/racetrack.html" target="_blank"> HTML LINK </a>
 </p>
 
 
@@ -122,6 +136,7 @@ A local 'limit' variable is used to store the loop end value, Global 'Flag' is u
 When cloning the repo, use `git clone --recursive` so that googletest module is also cloned in.
 
 Run `./build.sh` to compile the program with the tests and create the final executable with a single command. Manual building can be done using cmake.
+Run `./build.sh Debug` to build with additional printing of DEBUG messages of the run. It also dumps a debug.log file with the run status.
 
 You can run the program with
 ``` sh

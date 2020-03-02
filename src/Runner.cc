@@ -22,6 +22,11 @@ namespace Ircis {
   // Returns false if Runner is dead
   bool Runner::step() {
     path_.push_back(position_);
+    if (pause_time_) {
+      log_line("Pausing. Pause time ", pause_time_);
+      return pause_time_--;
+    }
+
     int current_char = grid_->get(position_.get_x(), position_.get_y());
     processed_chars_.push_back(current_char);
 
@@ -127,6 +132,10 @@ namespace Ircis {
 	  return false;
 	}
 	Data dat = st_.top();
+	if (!dat.is_integer or dat.value <= 0) {
+	  set_error("Random limit must be an integer greater than 0");
+	  return false;
+	}
 	st_.pop();
 	push_random_number_to_stack(dat.value);
 	break;
@@ -134,6 +143,21 @@ namespace Ircis {
     case CH_RAND:
       push_random_number_to_stack(1);
       break;
+    case CH_PAUSE:
+      {
+	if (st_.empty()) {
+	  set_error("Empty stack when looking for pause time");
+	  return false;
+	}
+	Data dat = st_.top();
+	if (!dat.is_integer or dat.value < 0) {
+	  set_error("Pause time must be an integer greater than or equal to 0");
+	  return false;
+	}
+	st_.pop();
+	pause_time_ = dat.value;
+	break;
+      }
     case CH_END:
       set_error("End character reached");
       return false;

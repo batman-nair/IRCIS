@@ -93,6 +93,7 @@ namespace Ircis {
     bool integer_mode_;
     std::string mode_buffer_;	// Holds string taken in a mode for processing
     std::string integer_mode_buffer_;
+    int pause_time_ = 0;
 
     std::shared_ptr<Grid> grid_;
     std::shared_ptr<Logger> log_;

@@ -37,6 +37,7 @@ namespace Ircis {
 
 #define CH_RAND 'r'
 #define CH_RAND_INT 'R'
+#define CH_PAUSE 'p'
 
 #define CH_DOT '.'
 #define CH_SPC ' '

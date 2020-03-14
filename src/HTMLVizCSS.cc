@@ -1,9 +1,17 @@
 #include <HTMLViz.h>
 
 #include <algorithm>
+#include <unordered_map>
 
 std::string sanitize_string(const std::string& str);
 
+std::unordered_map<char, std::string> utf8_emoji_mapping(
+						    {
+						     { 'v', u8"\U0001f447" },
+						     { '>', u8"\U0001f449" },
+						     { '<', u8"\U0001f448" },
+						     { '^', u8"\U0001f446" },
+						    });
 const char* start_css = R"(<!DOCTYPE html>
 <html>
 <head>
@@ -194,7 +202,11 @@ namespace Ircis {
     output_file_ << end_title;
     for (size_t xx = 0; xx < num_rows; ++xx) {
       for (size_t yy = 0; yy < num_cols; ++yy) {
-	output_file_ << R"(<div class="grid-item" style="grid-row:)" << xx+1 << R"(; grid-column:)" << yy+1 << R"("><textarea class="text" readonly>)" << lines_[xx][yy] << "</textarea></div>\n";
+	std::string str(1, lines_[xx][yy]);
+	if (emoji_for_html_chars_ && utf8_emoji_mapping.count(str[0])) {
+	  str = utf8_emoji_mapping[str[0]];
+	}
+	output_file_ << R"(<div class="grid-item" style="grid-row:)" << xx+1 << R"(; grid-column:)" << yy+1 << R"("><textarea class="text" readonly>)" << str << "</textarea></div>\n";
       }
     }
 

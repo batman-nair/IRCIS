@@ -23,7 +23,8 @@ The Visualizer helps in understanding the movement of these different *Runner* o
 | Character   | Commands                                                   |
 |:-----------:|:----------------------------------------------------------:|
 | < > ^ v     | Movement control                                           |
-| + - * / %   | Arithmetic Ops in stack (in *Integer* mode)                |
+| + - * / % ^ | Arithmetic Ops in stack (in *Integer* mode)                |
+| & | V < >   | Binary Ops in stack (in *Integer* mode) V is XOR; <> shifts|
 | #           | Print stack top to output                                  |
 | $           | Print Newline                                              |
 | !           | End Processing                                             |

@@ -40,6 +40,13 @@ namespace Ircis {
     ASSERT_EQ("/=1", getline(*output_));
     ASSERT_EQ("%=10", getline(*output_));
     ASSERT_EQ("20 30", getline(*output_));
+    ASSERT_EQ("^=1953125", getline(*output_));
+    ASSERT_EQ("&=1", getline(*output_));
+    ASSERT_EQ("|=13", getline(*output_));
+    ASSERT_EQ("V=12", getline(*output_));
+    ASSERT_EQ("<=2560", getline(*output_));
+    ASSERT_EQ(">=0", getline(*output_));
+    ASSERT_EQ("9 5", getline(*output_));
     output_->clear();
   }
   TEST_F(SystemTests, FactorsOutput) {

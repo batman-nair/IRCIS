@@ -240,6 +240,30 @@ namespace Ircis {
 	    log_line("Arith: ", num1, " % ", num2);
 	    num1 = num1 % num2;
 	    break;
+	  case CH_POW:
+	    log_line("Arith: ", num1, " ^ ", num2);
+	    num1 = num1 ^ num2;
+	    break;
+	  case CH_AND:
+	    log_line("Arith: ", num1, " & ", num2);
+	    num1 = num1 & num2;
+	    break;
+	  case CH_OR:
+	    log_line("Arith: ", num1, " | ", num2);
+	    num1 = num1 | num2;
+	    break;
+	  case CH_XOR:
+	    log_line("Arith: ", num1, " V ", num2);
+	    num1 = num1.V(num2);
+	    break;
+	  case CH_BL:
+	    log_line("Arith: ", num1, " < ", num2);
+	    num1 = num1 < num2;
+	    break;
+	  case CH_BR:
+	    log_line("Arith: ", num1, " > ", num2);
+	    num1 = num1 > num2;
+	    break;
 	  default:
 	    set_error("Unknown arithmetic op found: ", start_ch);
 	    return false;

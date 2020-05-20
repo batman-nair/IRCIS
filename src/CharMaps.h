@@ -22,6 +22,12 @@ namespace Ircis {
 #define CH_MUL '*'
 #define CH_DIV '/'
 #define CH_MOD '%'
+#define CH_POW '^'
+#define CH_AND '&'
+#define CH_OR  '|'
+#define CH_XOR 'V'
+#define CH_BL  '<'
+#define CH_BR  '>'
 
 #define CH_PRINT '#'
 #define CH_ENDL '$'

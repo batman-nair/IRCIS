@@ -3,6 +3,19 @@
 #include <string>
 
 namespace Ircis {
+
+  // integer exponentiation
+  inline int power(int a, int n) {
+    int res = 1;
+    while (n) {
+      if (n & 1)
+        res *= a;
+      a *= a;
+      n >>= 1;
+    }
+    return res;
+  }
+
   // Structure to store values taken from grid in stack
   struct DataType {
     DataType() : value(0), is_integer(true) { }
@@ -30,6 +43,24 @@ namespace Ircis {
     }
     DataType operator % (const DataType& num) {
       return DataType(value % num.value, true);
+    }
+    DataType operator ^ (const DataType& num) {
+      return DataType(power(value, num.value), true);
+    }
+    DataType operator & (const DataType& num) {
+      return DataType(value & num.value, true);
+    }
+    DataType operator | (const DataType& num) {
+      return DataType(value | num.value, true);
+    }
+    DataType V (const DataType& num) {
+      return DataType(value ^ num.value, true);
+    }
+    DataType operator < (const DataType& num) {
+      return DataType(value << num.value, true);
+    }
+    DataType operator > (const DataType& num) {
+      return DataType(value >> num.value, true);
     }
   };
 

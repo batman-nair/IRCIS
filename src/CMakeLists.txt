@@ -12,7 +12,6 @@ set(SOURCES
   DataType.cc
   CharMaps.cc
   )
-include_directories(.)
 
 add_library(${BINARY}_lib STATIC ${SOURCES})
 target_compile_features(${BINARY}_lib PUBLIC cxx_std_14)

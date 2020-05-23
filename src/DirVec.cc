@@ -1,4 +1,5 @@
 #include <DirVec.h>
+#include <Logger.h>
 
 namespace Ircis {
   Direction get_right(const Direction& dir) {
@@ -25,7 +26,9 @@ namespace Ircis {
     case 'E':  return EAST;
     case 'S':  return SOUTH;
     case 'W':  return WEST;
-    default:   return EAST;
+    default:
+      Logger::err_line_dbg("Got invalid direction value: ", start_direction_char, ", using default EAST");
+      return EAST;
     }
   }
 

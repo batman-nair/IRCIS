@@ -18,6 +18,7 @@ namespace Ircis {
     std::shared_ptr<std::stringstream> output_ = std::make_shared<std::stringstream>();
     Ircis hello_world_{"hello_world.txt", output_, true};
     Ircis calc_{"calc.txt", output_, true};
+    Ircis base64_{"base64.txt", output_, true};
     Ircis factors_{"factors.txt", output_, true};
     Ircis num2bin_{"num2bin.txt", output_, true};
     Ircis options_{"options.txt", output_, true};
@@ -47,6 +48,16 @@ namespace Ircis {
     ASSERT_EQ("<=2560", getline(*output_));
     ASSERT_EQ(">=0", getline(*output_));
     ASSERT_EQ("9 5", getline(*output_));
+    output_->clear();
+  }
+  TEST_F(SystemTests, Base64Output) {
+    while (base64_.update());
+    ASSERT_EQ("dec: 790656 b64: DBCA", getline(*output_));
+    ASSERT_EQ("dec: 1234 b64: TS", getline(*output_));
+    ASSERT_EQ("dec: 14118392 b64: 1234", getline(*output_));
+    ASSERT_EQ("dec: 5 b64: F", getline(*output_));
+    ASSERT_EQ("dec: 2 b64: C", getline(*output_));
+    ASSERT_EQ("dec: 1071083448 b64: /12+4", getline(*output_));
     output_->clear();
   }
   TEST_F(SystemTests, FactorsOutput) {

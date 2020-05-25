@@ -58,6 +58,8 @@ namespace Ircis {
     ASSERT_EQ("dec: 5 b64: F", getline(*output_));
     ASSERT_EQ("dec: 2 b64: C", getline(*output_));
     ASSERT_EQ("dec: 1071083448 b64: /12+4", getline(*output_));
+    ASSERT_EQ("dec: 2147483647 b64: B/////", getline(*output_));
+    ASSERT_EQ("dec: -1073741825 b64: -BAAAAB", getline(*output_));
     output_->clear();
   }
   TEST_F(SystemTests, FactorsOutput) {

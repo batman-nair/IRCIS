@@ -20,5 +20,12 @@
   but also work as b64 when they should
 .>....'/12+4.&N...............................v.
 .v............................................<.
+  large values are supported
+.>....'B/////.&N..............................v.
+.v............................................<.
+  too large will overflow, printing negative
+  base64 is supported
+.>....'C/////.&N..............................v.
+.v............................................<.
   this is 0, so the conditional above will fail
 .>....'AAAA.&N..................................

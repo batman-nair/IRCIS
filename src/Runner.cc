@@ -542,8 +542,8 @@ namespace Ircis {
   int base64_decode_int(std::string input) {
     // Remove leading As
     std::string str = input.erase(0, fmin(input.find_first_not_of('A'), input.size()-1));
-    // Return 0 on overflow
-    if ( str.empty() || str.size() > 5 ) return  0;
+    // Return 0 on empty string
+    if ( str.empty() ) return  0;
     int pos_val = 1; // positional value
     int result = 0;
     for( auto strpos = str.rbegin(); strpos < str.rend(); strpos++){
@@ -559,11 +559,20 @@ namespace Ircis {
   
   std::string base64_encode_int(int value) {
     std::string result;
-    result.push_back(base64_chars.at((value & 1056964608) >> 24));
-    result.push_back(base64_chars.at((value & 16515072) >> 18));
-    result.push_back(base64_chars.at((value & 258048) >> 12));
-    result.push_back(base64_chars.at((value & 4032) >> 6));
-    result.push_back(base64_chars.at((value & 63)));
+    int pos_value;
+    if ((value >> 30) > base64_chars.length()) {
+      result.push_back('-');
+      pos_value = -value;
+    }
+    else {
+      pos_value = value;
+    }
+    result.push_back(base64_chars.at(pos_value >> 30));
+    result.push_back(base64_chars.at((pos_value & 1056964608) >> 24));
+    result.push_back(base64_chars.at((pos_value & 16515072) >> 18));
+    result.push_back(base64_chars.at((pos_value & 258048) >> 12));
+    result.push_back(base64_chars.at((pos_value & 4032) >> 6));
+    result.push_back(base64_chars.at((pos_value & 63)));
     return result.erase(0, fmin(result.find_first_not_of('A'), result.size()-1));
   }
 

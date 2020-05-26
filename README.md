@@ -26,6 +26,7 @@ The Visualizer helps in understanding the movement of these different *Runner* o
 | + - * / % ^ | Arithmetic Ops in stack (in *Integer* mode)                |
 | & \| V < >   | Binary Ops in stack (in *Integer* mode) V is XOR; <> shifts|
 | #           | Print stack top to output                                  |
+| %           | Print stack top to output. Ints will be in base 64 chars   |
 | $           | Print Newline                                              |
 | !           | End Processing                                             |
 | \<space\> . | Blanks, Ignored                                            |

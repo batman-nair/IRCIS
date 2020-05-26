@@ -163,16 +163,34 @@ namespace Ircis {
       return false;
     case CH_PRINT:
       {
-	if (st_.empty()) {
-	  log_->print_line();
-	  set_error("Stack is empty, forcing exit.");
-	  return false;
-	}
-	auto top = st_.top();
-	log_line("Printing and popping: ", st_.top());
-	st_.pop();
-	log_->print(top.to_string());
-	break;
+        if (st_.empty()) {
+          log_->print_line();
+          set_error("Stack is empty, forcing exit.");
+          return false;
+        }
+        auto top = st_.top();
+        log_line("Printing and popping: ", st_.top());
+        st_.pop();
+        log_->print(top.to_string());
+        break;
+      }
+    case CH_PRINT_BASE64:
+      {
+        if (st_.empty()) {
+          log_->print_line();
+          set_error("Stack is empty, forcing exit.");
+          return false;
+        }
+        auto top = st_.top();
+        log_line("Printing and popping as Base 64: ", st_.top());
+        st_.pop();
+        if (top.is_integer) {
+          log_->print(base64_encode_int(top.value));
+        }
+        else {
+          log_->print(top.to_string());
+        }
+        break;
       }
     default:
       if (!is_blank(current_char)) {
@@ -183,20 +201,44 @@ namespace Ircis {
     return true;
   }
 
+  // if the first and second character of the buffer are both 
+  // valid base64 characters, don't treat it as arith
+  // (even if the first chars are / or +)
+  bool is_not_arith(char first_char, char second_char) {
+    return (!is_arith(first_char)) || (isbase64(first_char) && isbase64(second_char));
+  }
+
   bool Runner::process_integer_buffer() {
     auto it = integer_mode_buffer_.begin();
     ++it;			// Skip starting quote char
     char start_ch = *it;
     ++it;
-    if (isdigit(start_ch)) {	// Integer processing
-      int num = start_ch - '0';
+    char second_ch = *it;
+
+    if (isbase64(start_ch) && is_not_arith(start_ch, second_ch)) {	// Integer processing
+      //int num = start_ch - '0';
+      std::string buffer;
+      buffer.push_back(start_ch);
+      if (!isdigit(start_ch) && isbase64(start_ch)) {
+        base64_mode = true;
+      }
       while (it != integer_mode_buffer_.end()) {
-	char ch = *it++;
-	if (!isdigit(ch)) {
-	  set_error("Non integer character in integer processing.");
-	  return false;
-	}
-	num = num*10 + (ch-'0');
+        char ch = *it++;
+        if (!isdigit(ch) && isbase64(ch)) {
+          base64_mode = true;
+        }
+        if (!isbase64(ch)) {
+          set_error("Non integer character in integer processing.");
+          return false;
+        }
+        buffer.push_back(ch);
+      }
+      int num;
+      if (base64_mode) {
+        num = base64_decode_int(buffer);
+      }
+      else {
+        num = std::atoi(buffer.c_str());
       }
       Data dat(num, true);
       log_line("Pushing value to stack ", dat);
@@ -204,77 +246,78 @@ namespace Ircis {
     }
     else {
       if (is_arith(start_ch)) {
-	if (st_.size() < 2) {
-	  set_error("Not enough elements for arithmetic operation");
-	  return false;
-	}
-	Data num1 = st_.top();
-	log_line("Stack value popped ", st_.top());
-	st_.pop();
-	Data num2 = st_.top();
-	log_line("Stack value popped ", st_.top());
-	st_.pop();
-	if (num1.is_integer && num2.is_integer) {
-	  switch(start_ch) {
-	  case CH_ADD:
-	    log_line("Arith: ", num1, " + ", num2);
-	    num1 = num1 + num2;
-	    break;
-	  case CH_SUB:
-	    log_line("Arith: ", num1, " - ", num2);
-	    num1 = num1 - num2;
-	    break;
-	  case CH_MUL:
-	    log_line("Arith: ", num1, " * ", num2);
-	    num1 = num1 * num2;
-	    break;
-	  case CH_DIV:
-	    if (num2.value == 0) {
-	      set_error("Division by zero error");
-	      return false;
-	    }
-	    log_line("Arith: ", num1, " / ", num2);
-	    num1 = num1 / num2;
-	    break;
-	  case CH_MOD:
-	    log_line("Arith: ", num1, " % ", num2);
-	    num1 = num1 % num2;
-	    break;
-	  case CH_POW:
-	    log_line("Arith: ", num1, " ^ ", num2);
-	    num1 = num1 ^ num2;
-	    break;
-	  case CH_AND:
-	    log_line("Arith: ", num1, " & ", num2);
-	    num1 = num1 & num2;
-	    break;
-	  case CH_OR:
-	    log_line("Arith: ", num1, " | ", num2);
-	    num1 = num1 | num2;
-	    break;
-	  case CH_XOR:
-	    log_line("Arith: ", num1, " V ", num2);
-	    num1 = num1.V(num2);
-	    break;
-	  case CH_BL:
-	    log_line("Arith: ", num1, " < ", num2);
-	    num1 = num1 < num2;
-	    break;
-	  case CH_BR:
-	    log_line("Arith: ", num1, " > ", num2);
-	    num1 = num1 > num2;
-	    break;
-	  default:
-	    set_error("Unknown arithmetic op found: ", start_ch);
-	    return false;
-	  };
-	  log_line("Pushing value to stack ", num1);
-	  st_.push(num1);
-	}
+        if (st_.size() < 2) {
+          set_error("Not enough elements for arithmetic operation");
+          return false;
+        }
+        Data num1 = st_.top();
+        log_line("Stack value popped ", st_.top());
+        st_.pop();
+        Data num2 = st_.top();
+        log_line("Stack value popped ", st_.top());
+        st_.pop();
+        if (num1.is_integer && num2.is_integer) {
+          switch(start_ch) {
+            case CH_ADD:
+              log_line("Arith: ", num1, " + ", num2);
+              num1 = num1 + num2;
+              break;
+            case CH_SUB:
+              log_line("Arith: ", num1, " - ", num2);
+              num1 = num1 - num2;
+              break;
+            case CH_MUL:
+              log_line("Arith: ", num1, " * ", num2);
+              num1 = num1 * num2;
+              break;
+            case CH_DIV:
+              if (num2.value == 0) {
+                set_error("Division by zero error");
+                return false;
+              }
+              log_line("Arith: ", num1, " / ", num2);
+              num1 = num1 / num2;
+              break;
+            case CH_MOD:
+              log_line("Arith: ", num1, " % ", num2);
+              num1 = num1 % num2;
+              break;
+            case CH_POW:
+              log_line("Arith: ", num1, " ^ ", num2);
+              num1 = num1 ^ num2;
+              break;
+            case CH_AND:
+              log_line("Arith: ", num1, " & ", num2);
+              num1 = num1 & num2;
+              break;
+            case CH_OR:
+              log_line("Arith: ", num1, " | ", num2);
+              num1 = num1 | num2;
+              break;
+            case CH_XOR:
+              log_line("Arith: ", num1, " V ", num2);
+              num1 = num1.V(num2);
+              break;
+            case CH_BL:
+              log_line("Arith: ", num1, " < ", num2);
+              num1 = num1 < num2;
+              break;
+            case CH_BR:
+              log_line("Arith: ", num1, " > ", num2);
+              num1 = num1 > num2;
+              break;
+            default:
+              set_error("Unknown arithmetic op found: ", start_ch);
+              return false;
+          };
+          log_line("Pushing value to stack ", num1);
+          st_.push(num1);
+        }
       }
     }
 
     integer_mode_ = false;
+    base64_mode = false;
     integer_mode_buffer_.clear();
     return true;
   }
@@ -490,6 +533,47 @@ namespace Ircis {
     if (mode_end_chars[mode].find(current_char) != std::string::npos)
       return true;
     return false;
+  }
+
+  bool isbase64(char current_char) {
+    return base64_chars.find(current_char) != std::string::npos;
+  }
+
+  int base64_decode_int(std::string input) {
+    // Remove leading As
+    std::string str = input.erase(0, fmin(input.find_first_not_of('A'), input.size()-1));
+    // Return 0 on empty string
+    if ( str.empty() ) return  0;
+    int pos_val = 1; // positional value
+    int result = 0;
+    for( auto strpos = str.rbegin(); strpos < str.rend(); strpos++){
+      size_t digit_b10 = base64_chars.find(*strpos);
+      if ( digit_b10 == base64_chars.npos ) return 0;
+      else {
+        result += pos_val*static_cast<int>(digit_b10);
+        pos_val *= 64;
+      }
+    }
+    return result;
+  }
+  
+  std::string base64_encode_int(int value) {
+    std::string result;
+    int pos_value;
+    if ((value >> 30) > base64_chars.length()) {
+      result.push_back('-');
+      pos_value = -value;
+    }
+    else {
+      pos_value = value;
+    }
+    result.push_back(base64_chars.at(pos_value >> 30));
+    result.push_back(base64_chars.at((pos_value & 1056964608) >> 24));
+    result.push_back(base64_chars.at((pos_value & 16515072) >> 18));
+    result.push_back(base64_chars.at((pos_value & 258048) >> 12));
+    result.push_back(base64_chars.at((pos_value & 4032) >> 6));
+    result.push_back(base64_chars.at((pos_value & 63)));
+    return result.erase(0, fmin(result.find_first_not_of('A'), result.size()-1));
   }
 
 }

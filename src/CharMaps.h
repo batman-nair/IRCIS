@@ -30,6 +30,7 @@ namespace Ircis {
 #define CH_BR  '>'
 
 #define CH_PRINT '#'
+#define CH_PRINT_BASE64 '%'
 #define CH_ENDL '$'
 
 #define CH_PUSH '@'

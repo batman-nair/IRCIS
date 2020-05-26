@@ -29,7 +29,20 @@ namespace Ircis {
 		    { STACK_POP, { CH_DOT, CH_SPC } }
   };
 
+  // Base 64 characters
+  static const std::string base64_chars = 
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ" // 26
+    "abcdefghijklmnopqrstuvwxyz" // 26
+    "0123456789+/"; // 12
+
   bool is_mode_end_char(Mode mode, char current_char);
+
+  bool isbase64(char current_char);
+
+  int base64_decode_int(std::string input);
+
+  std::string base64_encode_int(int value);
+
 
   typedef std::unordered_map<std::string, DataType> variable_map_t;
 
@@ -52,6 +65,7 @@ namespace Ircis {
       mode_ = Mode::NONE;
       stack_mode_ = false;
       integer_mode_ = false;
+      base64_mode = false;
     }
     Runner(int id, DirVec init_pos, std::shared_ptr<Grid> grid, std::shared_ptr<Logger> log,
 	   std::shared_ptr<variable_map_t> global_var_map,
@@ -91,6 +105,7 @@ namespace Ircis {
     Mode mode_;
     bool stack_mode_;
     bool integer_mode_;
+    bool base64_mode;
     std::string mode_buffer_;	// Holds string taken in a mode for processing
     std::string integer_mode_buffer_;
     int pause_time_ = 0;

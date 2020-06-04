@@ -2,106 +2,44 @@
 #include <Logger.h>
 #include <Ircis.h>
 #include <getopt.h>
+#include <cxxopts.hpp>
 
 #include <iostream>
 #include <string>
 #include <stdlib.h>
 
-static int parseInt(std::string str, std::string descr) {
-  int to;
-  try {
-    to = std::stoi(str);
-  } catch (const std::invalid_argument& e) {
-		std::cerr << "Invalid value for " << descr << ": \"" << str << "\". "
-		      << "Expected an integer value." << std::endl;
-		exit(EXIT_FAILURE);
-	}
-  return to;
-}
-static char parseDir(std::string str) {
-  char to = std::toupper( str.front() ) ;
-  std::string valid = "NSEW";
-  if (valid.find(to) == std::string::npos) {
-		std::cerr << "Invalid value for direction: \"" << str << "\". "
-		      << "Expected N, S, E or W." << std::endl;
-		exit(EXIT_FAILURE);
-	}
-  return to;
-}
-
-
 int main(int argc, char *argv[]) {
-  intmax_t startx;
-  intmax_t starty;
-  char direction;
-  intmax_t speed;
-  /* Default values */
-  startx = 0;
-  starty = 0;
-  direction = 'E';
-  speed = 15;
+  cxxopts::Options options("IRCIS", "2D grid based esoteric programming language");
+  options.add_options()
+    ("i,input", "Input file list", cxxopts::value<std::vector<std::string>>())
+    ("s,speed", "Set the speed for generated animation", cxxopts::value<int>()->default_value("15"))
+    ("x,startx", "Starting x position", cxxopts::value<int>()->default_value("0"))
+    ("y,starty", "Starting y position", cxxopts::value<int>()->default_value("0"))
+    ("d,direction", "Specify the starting direction", cxxopts::value<std::string>()->default_value("E"))
+    ("h,help", "Print usage help")
+    ;
+  options.parse_positional({"input"});
+  options.positional_help("Input files to parse");
 
-  static struct option const long_options[] =
-  {
-    {"startx", required_argument, NULL, 'x'},
-    {"starty", required_argument, NULL, 'y'},
-    {"direction", required_argument, NULL, 'd'},
-    {"speed", required_argument, NULL, 's'},
-    {0, 0, 0, 0}
-  };
+  auto result = options.parse(argc, argv);
 
-  int option_index = 0;
-  while (true)
-  {
-    const auto opt = getopt_long(argc, argv, "x:y:d:s:", long_options, &option_index);
-
-    if (-1 == opt)
-      break;
-
-    switch (opt)
-    {
-      case 'x':
-        //startx = std::stoi(optarg);
-        startx = parseInt(optarg, "startx");
-        break;
-      case 'y':
-        starty = parseInt(optarg, "starty");
-        break;
-      case 'd':
-        direction = parseDir(optarg);
-        break;
-      case 's':
-	speed = parseInt(optarg, "speed");
-	break;
-      case 0:
-        break;
-    }
+  if (result.count("help") || !result.count("input")) {
+    std::cout << options.help() << std::endl;
+    exit(0);
   }
 
-  if (optind < argc)
-  {
-    while (optind < argc)
-    {
-      std::string file_name = argv[optind++];
-      Ircis::Ircis ircis(file_name, startx, starty, direction);
-      ircis.set_generate_html("CSS");
-      ircis.set_animation_speed(speed);
-      while (ircis.update());
-    }
-  }
-  else
-  {
-    std::cout << "Required source file name argument" << std::endl;
-    std::cout << "Usage: ircis <file_name> <option(s)>\n"
-      << "Options:\n"
-      << "\t-x,--startx num\t\tStarting x position (Default: 0)\n"
-      << "\t-y,--starty num\t\tStarting y position (Default: 0)\n"
-      << "\t-d,--direction [NSEW]\tSpecify the starting direction (Default: E)"
-      << "\t-s,--speed [num]\tSet the speed for generated animation (Default: 15)"
-      << std::endl;
-    exit(EXIT_FAILURE);
-  }
+  int startx = result["startx"].as<int>();
+  int starty = result["starty"].as<int>();
+  char direction = result["direction"].as<std::string>().front();
+  int speed = result["speed"].as<int>();
+  std::vector<std::string> input_files = result["input"].as<std::vector<std::string>>();
 
+  for (std::string& file_name: input_files) {
+    Ircis::Ircis ircis(file_name, startx, starty, direction);
+    ircis.set_generate_html("CSS");
+    ircis.set_animation_speed(speed);
+    while (ircis.update());
+  }
 
   Ircis::Logger::log_line_dbg("Program has finished running");
 

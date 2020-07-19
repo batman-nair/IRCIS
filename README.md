@@ -175,4 +175,4 @@ You can see how this works with these examples:
 
 If you have some cool feature to add or see, feel free to raise a PR or issue to let us know! :)
 
-Contributors: @bhudgeons(++features), @prathyvsh(the cool banner)
+Contributors: [@bhudgeons](https://github.com/bhudgeons)(++features), [@prathyvsh](https://github.com/prathyvsh)(the cool banner)

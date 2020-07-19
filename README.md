@@ -1,4 +1,4 @@
-# IRCIS (I Run Chars I See)
+<img src="screencaps/banner.png" height="250px"/>
 
 IRCIS is an esoteric programming language where the program exists in a two-dimensional grid of cells, where each cell contains a single instruction, and execution can proceed in any cardinal direction across this grid -- not just left-to-right, but also right-to-left, top-to-bottom, and bottom-to-top.
 
@@ -170,3 +170,9 @@ You can see how this works with these examples:
 ./ircis examples/options.txt -x 2 -y 2 -d S
 ./ircis examples/options.txt --startx 59 --starty 12 --direction W
 ```
+
+## Contributing
+
+If you have some cool feature to add or see, feel free to raise a PR or issue to let us know! :)
+
+Contributors: @bhudgeons(++features), @prathyvsh(the cool banner)
